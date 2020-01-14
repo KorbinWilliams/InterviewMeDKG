@@ -1,37 +1,29 @@
-import mongoose from "mongoose"
-import Quiz from "../models/Quiz"
-import ApiError from "../utils/ApiError"
+import mongoose from "mongoose";
+import Category from "../models/Category";
+import ApiError from "../utils/ApiError";
 
-const _repository = mongoose.model('Quiz', Quiz)
+const _repository = mongoose.model("Category", Category);
 
-class QuizService {
-
-  async getAll(userId) {
-    return await _repository.find({ authorId: userId })
+class CategoryService {
+  async getAll() {
+    return await _repository.find();
   }
 
   async create(rawData) {
-    let data = await _repository.create(rawData)
-    return data
-  }
-
-  async edit(id, userId, update) {
-    let data = await _repository.findOneAndUpdate({ _id: id, authorId: userId }, update, { new: true })
-    if (!data) {
-      throw new ApiError("Invalid ID or you do not own this quiz", 400);
-    }
+    let data = await _repository.create(rawData);
     return data;
   }
 
   async delete(id, userId) {
-    let data = await _repository.findOneAndRemove({ _id: id, authorId: userId });
+    let data = await _repository.findOneAndRemove({
+      _id: id,
+      authorId: userId
+    });
     if (!data) {
-      throw new ApiError("Invalid ID or you do not own this quiz", 400);
+      throw new ApiError("Invalid ID or you do not own this category", 400);
     }
   }
-
 }
 
-
-const _quizService = new QuizService()
-export default _quizService
+const _categoryService = new CategoryService();
+export default _categoryService;
