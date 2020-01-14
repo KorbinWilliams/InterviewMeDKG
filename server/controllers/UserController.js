@@ -1,6 +1,7 @@
 import express from 'express'
 import { Authorize } from '../middleware/authorize'
 import _userService from "../services/UserService";
+import _profileService from "../services/ProfileService";
 
 //PUBLIC
 export default class UserController {
@@ -19,7 +20,10 @@ export default class UserController {
     }
     async register(req, res, next) {
         try {
-            let user = await _userService.create(req.body)
+            let user = await _userService.create(req.body).then(res => {
+                _profileService.create(req.params.name, req.params.email)
+            }
+            )
             //SET THE SESSION UID (SHORT FOR USERID)
             req.session.uid = user._id
             res.status(201).send(user)
