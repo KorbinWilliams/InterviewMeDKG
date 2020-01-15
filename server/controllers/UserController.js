@@ -20,13 +20,11 @@ export default class UserController {
     }
     async register(req, res, next) {
         try {
-            let user = await _userService.create(req.body).then(res => {
-                _profileService.create(req.params.name, req.params.email)
-            }
-            )
+            let user = await _userService.create(req.body)
             //SET THE SESSION UID (SHORT FOR USERID)
             req.session.uid = user._id
             res.status(201).send(user)
+            // NOTE if getting errors for register it's probably here
         }
         catch (err) {
             next(err)
@@ -70,3 +68,4 @@ export default class UserController {
 }
 
 
+s

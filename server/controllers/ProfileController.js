@@ -7,8 +7,9 @@ import { Authorize } from '../middleware/authorize.js'
 export default class ProfileController {
   constructor() {
     this.router = express.Router()
-      .use(Authorize.authenticated)
       .get('/:id', this.getById)
+      .use(Authorize.authenticated)
+      .post('', this.create)
       .put('/:id', this.edit)
       .use(this.defaultRoute)
   }
@@ -17,6 +18,14 @@ export default class ProfileController {
 
   defaultRoute(req, res, next) {
     next({ status: 404, message: 'No Such Route' })
+  }
+
+  async create(req, res, next) {
+    try {
+      req.body.authorId = req.session.uid
+      let data = await _profileService.create(req.body)
+      return res.status(201).send(data)
+    } catch (error) { next(error) }
   }
 
   async getById(req, res, next) {
