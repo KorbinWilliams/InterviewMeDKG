@@ -1,6 +1,7 @@
 import express from 'express'
 import { Authorize } from '../middleware/authorize'
 import _userService from "../services/UserService";
+import _profileService from "../services/ProfileService";
 
 //PUBLIC
 export default class UserController {
@@ -23,6 +24,7 @@ export default class UserController {
             //SET THE SESSION UID (SHORT FOR USERID)
             req.session.uid = user._id
             res.status(201).send(user)
+            // NOTE if getting errors for register it's probably here
         }
         catch (err) {
             next(err)
@@ -66,3 +68,4 @@ export default class UserController {
 }
 
 
+s
