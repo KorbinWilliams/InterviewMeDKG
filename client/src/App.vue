@@ -7,6 +7,7 @@
 </template>
 
 <script>
+	import Widget_User from "./components/Widget_User";
 	
 	export default {
 		name: "App"

@@ -2,12 +2,11 @@
   position: absolute;
   top: 0;
   right: 0; }
+  #widget-user .widget-content {
+    box-sizing: border-box;
+    padding: 1rem; }
 
-.widget-content {
-  margin: .5rem;
-  width: 300px;
-  position: absolute;
-  top: 0;
-  right: 0; }
+#widget-username {
+  text-align: center; }
 
 /*# sourceMappingURL=Widget_User.css.map */

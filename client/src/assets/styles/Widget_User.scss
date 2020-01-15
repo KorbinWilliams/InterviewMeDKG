@@ -3,13 +3,13 @@
 	top: 0;
 	right: 0;
 	
-}
 	.widget-content {
-		margin: .5rem;
-		width: 300px;
+		box-sizing: border-box;
+		padding: 1rem;
 		
-		//display: ;
-		position: absolute;
-		top: 0;
-		right: 0;
 	}
+	
+}
+#widget-username {
+	text-align: center;
+}

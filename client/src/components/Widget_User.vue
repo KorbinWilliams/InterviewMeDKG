@@ -1,37 +1,28 @@
 <template>
-	<md-menu id="widget-user">
-		<md-button>
+	<md-menu id="widget-user" md-align-trigger>
+		<md-button md-menu-trigger id="widget-trigger">
 			<img src="../assets/media/settings.svg" alt="Settings" class="md-icon">
 		</md-button>
+		
 		<md-menu-content class="widget-content">
 			<div id="info">
-				<h2>{{user.name}}</h2>
+				<h3 id="widget-username">{{user.name}}</h3>
 			</div>
-			<div id="options">
-				<md-menu-item>
-					<router-link to="/" tag="p">Privacy Settings</router-link>
-				</md-menu-item>
-				<md-menu-item>
-				<router-link to="/" tag="p">--Coming Soon, when i remember what was going here... --</router-link>
-				</md-menu-item>
-				<button type="button" @click="logOut" id="btn-log-out">Log Out</button>
-			</div>
+			<md-menu-item >
+				<router-link to="settings_privacy" tag="a">Privacy Settings</router-link>
+			</md-menu-item>
+			<md-menu-item>
+				<router-link to="profile" tag="a">Profile</router-link>
+			</md-menu-item>
+			<button type="button" @click="logOut" id="btn-log-out">Log Out</button>
 		</md-menu-content>
 	</md-menu>
 </template>
 
 <script>
-	import {MdMenu, MdButton} from 'vue-material';
-	import 'vue-material/dist/vue-material.min.css';
-	import 'vue-material/dist/theme/default.css';
-	
-	// Vue.use(MdAvatar);
-	
 	export default {
 		name: "Widget_User"
 		, components: {
-			MdMenu
-			, MdButton
 		}
 		, data () {
 			return {
