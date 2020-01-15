@@ -7,9 +7,9 @@ export default class CategoryController {
   constructor() {
     this.router = express
       .Router()
-      .use(Authorize.authenticated)
       .get("", this.getAll)
       .get("category/:id", this.getQuizesByCategoryId)
+      .use(Authorize.authenticated)
       .post("", this.create)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
