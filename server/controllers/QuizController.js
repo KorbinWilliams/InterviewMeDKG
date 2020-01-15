@@ -7,8 +7,8 @@ import { Authorize } from '../middleware/authorize.js'
 export default class QuizController {
   constructor() {
     this.router = express.Router()
-      .use(Authorize.authenticated)
       .get('/:id', this.getById)
+      .use(Authorize.authenticated)
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)

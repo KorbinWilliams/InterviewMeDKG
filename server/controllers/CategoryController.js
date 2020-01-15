@@ -1,5 +1,6 @@
 import _categoryService from "../services/CategoryService";
 import express from "express";
+import _quizService from "../services/QuizService"
 import { Authorize } from "../middleware/authorize.js";
 
 //PUBLIC
@@ -7,9 +8,9 @@ export default class CategoryController {
   constructor() {
     this.router = express
       .Router()
-      .use(Authorize.authenticated)
       .get("", this.getAll)
       .get("category/:id", this.getQuizesByCategoryId)
+      .use(Authorize.authenticated)
       .post("", this.create)
       .delete("/:id", this.delete)
       .use(this.defaultRoute);
@@ -30,7 +31,7 @@ export default class CategoryController {
 
   async getQuizesByCategoryId(req, res, next) {
     try {
-      let data = await _categoryService.getQuizesByCategoryId(req.params.id);
+      let data = await _quizService.getQuizesByCategoryId(req.params.id);
     } catch (error) {
       next(error);
     }
