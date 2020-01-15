@@ -13,8 +13,8 @@ class ProfileService {
     return data;
   }
 
-  async create(rawData) {
-    let data = await _repository.create(rawData);
+  async create(name, email) {
+    let data = await _repository.create(name, email);
     return data;
   }
 
