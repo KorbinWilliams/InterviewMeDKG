@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Boards from '../views/Boards.vue'
-import Board from '../views/Board.vue'
-import Login from '../views/Login.vue'
+import View_Home from "../views/View_Home";
+import View_Login from "../views/View_Login";
+import View_Create_Account from "../views/View_Create_Account";
 
 Vue.use(Router)
 
@@ -10,19 +10,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'boards',
-      component: Boards
+      name: 'home',
+      component: View_Home
     },
     {
-      path: '/boards/:boardId',
-      name: 'board',
-      props: true,
-      component: Board
+      path: '/sign_up',
+      name: 'sign_up',
+      component: View_Create_Account
     },
     {
       path: '/login',
       name: 'login',
-      component: Login
+      component: View_Login
     },
     {
       path: "*",
