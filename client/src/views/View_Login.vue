@@ -2,7 +2,7 @@
 	<div id="backboard">
 		<notifications group="login"/>
 		<div id="login">
-			<form @submit.prevent="login">
+			<form @submit.prevent="loginUser">
 				<label for="input1"> Email</label>
 				<input id="input1" type="text" v-model="creds.email" required/>
 				<label for="input2"> Password</label>
