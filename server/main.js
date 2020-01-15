@@ -2,18 +2,28 @@ import express from "express";
 import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbconfig";
+import Socket from "./Socket/SocketService"
+
 const server = express();
 
-//Fire up database connection
-DbContext.connect();
+
 
 //Sets the port to Heroku's, and the files to the built project
+const socketServer = require('http').createServer(server)
+const io = require("socket.io")(socketServer, {
+  path: '',
+  pingTimeout: 10000
+})
 var port = process.env.PORT || 3000;
 server.use(express.static(__dirname + "/../client/dist"));
 
+//Fire up database connection
+DbContext.connect();
+Socket.setIO(io)
+
 var whitelist = ["http://localhost:8080"];
 var corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
     callback(null, originIsWhitelisted);
   },
