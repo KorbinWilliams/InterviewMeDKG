@@ -66,6 +66,3 @@ export default class UserController {
         } catch (error) { next(error) }
     }
 }
-
-
-s
