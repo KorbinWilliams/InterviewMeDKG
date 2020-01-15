@@ -15,6 +15,7 @@ class ProfileService {
 
   async create(body) {
     let data = await _repository.create(body.name, body.email);
+
     return data;
   }
 
