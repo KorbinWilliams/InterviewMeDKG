@@ -3,15 +3,14 @@
 		<router-view/>
 		<notifications group="primary"/>
 		<notifications group="error"/>
-	
 	</div>
 </template>
 
 <script>
+	
 	export default {
 		name: "App"
 		, components: {
-			// VueNotify
 		}
 	};
 </script>
