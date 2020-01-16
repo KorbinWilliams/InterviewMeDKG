@@ -62,7 +62,7 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("getActiveProfile");
+    this.$store.dispatch("getUserProfile");
   },
   computed: {
     profile() {
@@ -71,7 +71,7 @@ export default {
   },
   methods: {
     saveProfile() {
-      this.$store.dispatch("edit", profileSettings);
+      this.$store.dispatch("editProfile", profileSettings);
     }
   }
 };
