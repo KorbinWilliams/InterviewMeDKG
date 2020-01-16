@@ -34,6 +34,7 @@ export default class ProfileController {
       return res.send(data)
     } catch (error) { next(error) }
   }
+
   async edit(req, res, next) {
     try {
       let data = await _profileService.edit(req.body.id, req.session.uid, req.body)

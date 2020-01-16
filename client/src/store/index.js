@@ -26,6 +26,15 @@ export default new Vuex.Store({
 		setUser(state, user) {
 			state.user = user
 		},
+		resetState(state) {
+			state = {
+				user: {},
+				userProfile: {},
+				activeProfile: {},
+				categories: [],
+				activeQuiz: {}
+			}
+		}
 	},
 	actions: {
 		//#region -- AUTH STUFF --
@@ -33,7 +42,7 @@ export default new Vuex.Store({
 			try {
 				let user = await AuthService.Register(creds);
 				commit('setUser', user);
-				router.push({ name: "boards" })
+				router.push({ name: "home" })
 			} catch (e) {
 				console.warn(e.message)
 			}
@@ -42,7 +51,7 @@ export default new Vuex.Store({
 			try {
 				let user = await AuthService.Login(creds);
 				commit('setUser', user);
-				router.push({ name: "boards" })
+				router.push({ name: "home" })
 			} catch (e) {
 				console.warn(e.message)
 			}
