@@ -48,7 +48,7 @@
 
 <script>
 export default {
-  name: "Profile",
+  name: "View_Profile",
   props: [],
   data: {
     profileSettings: {
