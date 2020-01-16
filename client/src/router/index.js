@@ -7,7 +7,7 @@ import View_Login from "../views/View_Login";
 // @ts-ignore
 import View_Create_Account from "../views/View_Create_Account";
 // @ts-ignore
-import View_Profile from "../views/View_Profile"
+import View_Profile from "../views/View_Profile";
 // @ts-ignore
 import View_Quiz_Categories from "../views/View_Quiz_Categories";
 // @ts-ignore
@@ -32,8 +32,8 @@ export default new Router({
       component: View_Login
     },
     {
-      path: '/profile',
-      name: 'profile',
+      path: "/profile",
+      name: "profile",
       component: View_Profile
     },
     {

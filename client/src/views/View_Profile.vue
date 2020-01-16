@@ -20,19 +20,19 @@
         </form>
       </div>
       <div class="col-6 general-info">
-        <p>{{name}}</p>
+        <p>{{ name }}</p>
         <form>
           <input type="text" v-model="profileSettings.name" />
         </form>
-        <p>{{email}}</p>
+        <p>{{ email }}</p>
         <form>
           <input type="text" v-model="profileSettings.email" />
         </form>
-        <p>{{jobTitle}}</p>
+        <p>{{ jobTitle }}</p>
         <form>
           <input type="text" v-model="profileSettings.jobTitle" />
         </form>
-        <p>{{jobSkills}}</p>
+        <p>{{ jobSkills }}</p>
         <form>
           <input type="text" v-model="profileSettings.jobSkills" />
         </form>
@@ -77,5 +77,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>
