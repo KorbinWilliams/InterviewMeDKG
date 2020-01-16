@@ -3,7 +3,7 @@ import Router from "vue-router";
 import View_Home from "../views/View_Home";
 import View_Login from "../views/View_Login";
 import View_Create_Account from "../views/View_Create_Account";
-import Profile from "../views/Profile"
+import View_Profile from "../views/View_Profile";
 import View_Quiz_Categories from "../views/View_Quiz_Categories";
 import View_TextChat_Categories from "../views/View_TextChat_Categories";
 Vue.use(Router);
@@ -26,9 +26,9 @@ export default new Router({
       component: View_Login
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: Profile
+      path: "/profile",
+      name: "profile",
+      component: View_Profile
     },
     {
       path: "/quiz_categories",

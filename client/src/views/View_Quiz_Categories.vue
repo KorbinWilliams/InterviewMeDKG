@@ -14,6 +14,7 @@
 <script>
 export default {
   name: "quiz_categories",
+  props: [],
   data() {
     return {
       name: ""
