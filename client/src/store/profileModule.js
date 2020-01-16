@@ -1,10 +1,13 @@
 let profileModule = {
   actions: {
-    async get
+    async getUserProfile({ commit, dispatch }, id) {
+      let res = await _api.get("profiles/" + id)
+      commit("")
+    },
 
-      async saveProfile({ commit, dispatch }, id, profileSettings) {
-        let res = await _api.put("profile/" + id)
-        commit("userProfile")
-      }
+    async saveProfile({ commit, dispatch }, id, profileSettings) {
+      let res = await _api.put("profiles/" + id)
+      commit("userProfile", res.data)
+    }
   }
 }

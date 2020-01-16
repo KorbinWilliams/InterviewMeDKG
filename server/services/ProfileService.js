@@ -5,8 +5,8 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Profile", Profile);
 
 class ProfileService {
-  async getById(id, userId) {
-    let data = await _repository.findOne({ _id: id, authorId: userId });
+  async getById(id) {
+    let data = await _repository.findOne({ _id: id });
     if (!data) {
       throw new ApiError("Invalid ID", 400);
     }
@@ -15,7 +15,6 @@ class ProfileService {
 
   async create(body) {
     let data = await _repository.create(body.name, body.email);
-
     return data;
   }
 
