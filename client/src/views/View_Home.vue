@@ -1,36 +1,48 @@
 <template>
   <div id="home">
-    <Widget_User />
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <Widget_User />
+        </div>
+      </div>
+    </div>
     <div class="container mt-5">
-      <div class="row align-items-center mt-5" id="homeCards">
+      <div class="row align-items-center pt-5 mt-5">
         <div class="col-4">
-          <div class="card-block">
-            <h5 class="VSIP text-muted">Coming Soon</h5>
-            <img
-              src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-              class="card-img"
-              alt=""
-            />
+          <div class="card" id="comingSoon">
+            <div class="card-block">
+              <h5 class="VSIP">Coming Soon</h5>
+              <img
+                src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                class="card-img"
+                alt=""
+              />
+            </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card-block">
-            <h5>Text Interview</h5>
-            <img
-              src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              class="card-img"
-              alt=""
-            />
+          <div class="card">
+            <div class="card-block">
+              <h5>Text Interview</h5>
+              <img
+                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                class="card-img"
+                alt=""
+              />
+            </div>
           </div>
         </div>
         <div class="col-4">
-          <div class="card-block">
-            <h5>Quiz</h5>
-            <img
-              src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-              class="card-img"
-              alt=""
-            />
+          <div class="card">
+            <div class="card-block">
+              <h5>Quiz</h5>
+              <img
+                src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                class="card-img"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -50,11 +62,14 @@ export default {
 </script>
 
 <style scoped>
-#homeCards {
-  /* display: flex; */
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: center;
+#home {
+  background-color: cornflowerblue;
+}
+.widget {
+  width: 100%;
+}
+#comingSoon {
+  background-color: grey;
 }
 .container {
   height: 100vh;
