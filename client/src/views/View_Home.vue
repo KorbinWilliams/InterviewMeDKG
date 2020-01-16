@@ -22,28 +22,32 @@
           </div>
         </div>
         <div class="col-4">
-          <div class="card">
-            <div class="card-block">
-              <h5>Text Interview</h5>
-              <img
-                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                class="card-img"
-                alt=""
-              />
+          <router-link to="/text_categories">
+            <div class="card">
+              <div class="card-block">
+                <h5>Text Interview</h5>
+                <img
+                  src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                  class="card-img"
+                  alt=""
+                />
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
         <div class="col-4">
-          <div class="card">
-            <div class="card-block">
-              <h5>Quiz</h5>
-              <img
-                src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-                class="card-img"
-                alt=""
-              />
+          <router-link to="/quiz_categories">
+            <div class="card">
+              <div class="card-block">
+                <h5>Quiz</h5>
+                <img
+                  src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
+                  class="card-img"
+                  alt=""
+                />
+              </div>
             </div>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
