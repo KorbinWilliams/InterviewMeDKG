@@ -11,7 +11,7 @@ import View_Profile from "../views/View_Profile";
 // @ts-ignore
 import View_Quiz_Categories from "../views/View_Quiz_Categories";
 // @ts-ignore
-import View_TextChat_Categories from "../views/View_TextChat_Categories";
+import View_Text_Chat_Categories from "../views/View_Text_Chat_Categories";
 Vue.use(Router);
 
 export default new Router({
@@ -44,7 +44,7 @@ export default new Router({
     {
       path: "/text_categories",
       name: "text_categories",
-      component: View_TextChat_Categories
+      component: View_Text_Chat_Categories
     },
     {
       path: "*",

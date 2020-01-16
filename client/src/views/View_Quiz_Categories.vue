@@ -1,7 +1,12 @@
 <template>
-  <div id="categories">
+  <div class="container categories">
+    <div class="row">
+      <div class="col">
+        <h2 class="text-center">Quiz Categories</h2>
+      </div>
+    </div>
+
     <div class="card-deck">
-      <P>categories</P>
       <categories
         v-for="category in categories"
         :key="category.id"
@@ -25,6 +30,7 @@ export default {
 
 <style scoped>
 #categories {
+  min-height: 100vh;
   background: rgb(159, 159, 248);
 }
 </style>
