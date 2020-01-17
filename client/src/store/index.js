@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Axios from 'axios';
 import router from '../router/index';
 import AuthService from '../AuthService';
+import socketStore from './socketStore';
 
 Vue.use (Vuex);
 
@@ -19,6 +20,9 @@ export default new Vuex.Store ({
 		user: {},
 		boards: [],
 		activeBoard: {}
+	},
+	modules: {
+		socketStore
 	},
 	mutations: {
 		setUser (state, user) {

@@ -1,7 +1,7 @@
 <template>
 	<div id="home">
 		<Widget_User/>
-	
+		<button type="button" @click="talk">Talk</button>
 	</div>
 </template>
 
@@ -12,6 +12,14 @@
 		name: "View_Home"
 		, components: {
 			Widget_User
+		}
+		, mounted () {
+		
+		}
+		, methods: {
+			talk () {
+				this.$store.dispatch('talk');
+			}
 		}
 	}
 </script>

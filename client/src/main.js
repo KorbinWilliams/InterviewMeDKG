@@ -24,3 +24,4 @@ async function init() {
 Vue.use(VueMaterial);
 Vue.use(Notifications);
 init();
+store.dispatch('initializeSocket');

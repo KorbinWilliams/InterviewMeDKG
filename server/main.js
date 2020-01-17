@@ -1,25 +1,24 @@
 import express from "express";
-import cors from "cors";
 import bp from "body-parser";
 import DbContext from "./db/dbconfig";
 import Socket from "./Socket/SocketService"
+import cors from "cors";
+
+
+
 
 const server = express();
-
-
-
-//Sets the port to Heroku's, and the files to the built project
-const socketServer = require('http').createServer(server)
-const io = require("socket.io")(socketServer, {
+const socketServer = require('http').createServer(server);
+const io = require("socket.io")(socketServer/*, {
   path: '',
   pingTimeout: 10000
-})
+}*/);
 var port = process.env.PORT || 3000;
 server.use(express.static(__dirname + "/../client/dist"));
-
+// io.listen(port);
 //Fire up database connection
 DbContext.connect();
-Socket.setIO(io)
+Socket.setIO(io);
 
 var whitelist = ["http://localhost:8080"];
 var corsOptions = {
@@ -51,7 +50,6 @@ import ProfileController from "./controllers/ProfileController";
 import CategoryController from "./controllers/CategoryController";
 server.use("/api/quizs", new QuizController().router);
 server.use("/api/profiles", new ProfileController().router);
-server.use("/api/categories", new CategoryController().router);
 
 //NOTE Default error handler, catches all routes with an error attached
 server.use((error, req, res, next) => {
@@ -65,6 +63,6 @@ server.use("*", (req, res, next) => {
   });
 });
 
-server.listen(port, () => {
+socketServer.listen(port, () => {
   console.log("server running on port", port);
 });
