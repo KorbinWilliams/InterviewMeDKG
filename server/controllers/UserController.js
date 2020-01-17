@@ -65,4 +65,12 @@ export default class UserController {
       next(error);
     }
   }
+
+  async getProfileByUserEmail(req, res, next) {
+    try {
+      let data = _profileService.getProfileByUserEmail(req.body.email)
+    } catch (error) {
+      next(error)
+    }
+  }
 }

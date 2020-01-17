@@ -5,13 +5,6 @@ import ApiError from "../utils/ApiError"
 const _repository = mongoose.model('Quiz', Quiz)
 
 class QuizService {
-  async getQuizesByCategoryId(categoryId) {
-    let data = await _repository.find({ _id: categoryId })
-    if (!data) {
-      throw new ApiError("Invalid ID", 400)
-    }
-    return data
-  }
 
   async getById(id) {
     let data = await _repository.findOne({ _id: id })

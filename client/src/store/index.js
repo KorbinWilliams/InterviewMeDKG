@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import Axios from 'axios';
 import router from '../router/index';
 import AuthService from '../AuthService';
+import profileModule from "./profileModule"
 
 Vue.use(Vuex);
 
@@ -34,6 +35,12 @@ export default new Vuex.Store({
 				categories: [],
 				activeQuiz: {}
 			}
+		},
+		setUserProfile(state, data) {
+			state.userProfile = data
+		},
+		setActiveProfile(state, data) {
+			state.activeProfile = data
 		}
 	},
 	actions: {
@@ -69,5 +76,8 @@ export default new Vuex.Store({
 		},
 		//#endregion
 
+	},
+	modules: {
+		profileModule
 	}
 })
