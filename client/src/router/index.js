@@ -12,6 +12,8 @@ import View_Profile from "../views/View_Profile";
 import View_Quiz_Categories from "../views/View_Quiz_Categories";
 // @ts-ignore
 import View_Text_Chat_Categories from "../views/View_Text_Chat_Categories";
+// @ts-ignore
+import View_Form_Quiz from "../views/View_Form_Quiz";
 Vue.use(Router);
 
 export default new Router({
@@ -40,6 +42,11 @@ export default new Router({
       path: "/quiz_categories",
       name: "quiz_categories",
       component: View_Quiz_Categories
+    },
+    {
+      path: "/quiz_form",
+      name: "quiz_form",
+      component: View_Form_Quiz
     },
     {
       path: "/text_categories",

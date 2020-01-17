@@ -11,7 +11,9 @@
       </form>
       <p>
         Don't have an account?
-        <router-link to="/sign_up" tag="h6" id="sign-up">Create One</router-link>
+        <router-link to="/sign_up" tag="h6" id="sign-up"
+          >Create One</router-link
+        >
       </p>
     </div>
   </div>
@@ -30,7 +32,7 @@ export default {
   },
   beforeCreate() {
     if (this.$store.state.user._id) {
-      this.$router.push({ name: "boards" });
+      this.$router.push({ name: "/" });
     }
   },
   methods: {
