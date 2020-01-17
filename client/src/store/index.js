@@ -4,6 +4,7 @@ import Axios from 'axios';
 import router from '../router/index';
 import AuthService from '../AuthService';
 import socketStore from './socketStore';
+import profileModule from "./profileModule"
 
 Vue.use (Vuex);
 
@@ -13,13 +14,15 @@ let api = Axios.create ({
 	baseURL: base + "api/",
 	timeout: 3000,
 	withCredentials: true
-})
+});
 
 export default new Vuex.Store ({
 	state: {
 		user: {},
-		boards: [],
-		activeBoard: {}
+		userProfile: {},
+		activeProfile: {},
+		categories: [],
+		activeQuiz: {}
 	},
 	modules: {
 		socketStore
@@ -28,23 +31,38 @@ export default new Vuex.Store ({
 		setUser (state, user) {
 			state.user = user
 		},
+		resetState(state) {
+			state = {
+				user: {},
+				userProfile: {},
+				activeProfile: {},
+				categories: [],
+				activeQuiz: {}
+			}
+		},
+		setUserProfile(state, data) {
+			state.userProfile = data
+		},
+		setActiveProfile(state, data) {
+			state.activeProfile = data
+		}
 	},
 	actions: {
 		//#region -- AUTH STUFF --
 		async register ({commit, dispatch}, creds) {
 			try {
-				let user = await AuthService.Register (creds);
-				commit ('setUser', user);
-				router.push ({name: "boards"})
+				let user = await AuthService.Register(creds);
+				commit('setUser', user);
+				router.push({ name: "home" })
 			} catch (e) {
-				console.warn (e.message)
+				console.warn(e.message)
 			}
 		},
 		async login ({commit, dispatch}, creds) {
 			try {
-				let user = await AuthService.Login (creds);
-				commit ('setUser', user);
-				router.push ({name: "boards"})
+				let user = await AuthService.Login(creds);
+				commit('setUser', user);
+				router.push({ name: "home" })
 			} catch (e) {
 				console.warn (e.message)
 			}

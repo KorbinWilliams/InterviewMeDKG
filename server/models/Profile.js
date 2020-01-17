@@ -5,12 +5,12 @@ let ObjectId = Schema.Types.ObjectId;
 const Profile = new Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, required: false },
+    email: { type: String, required: true },
     userImage: { type: String },
-    jobTitle: { type: String, required: false },
+    jobTitle: { type: String },
     jobSkills: { type: String, required: true },
-    interviewerStatus: { type: Boolean, required: true },
-    intervieweeStatus: { type: Boolean, required: true },
+    interviewerStatus: { type: Boolean, default: true },
+    intervieweeStatus: { type: Boolean, default: true },
     authorId: { type: ObjectId, ref: "User", required: true }
   },
   { timestamps: true }
