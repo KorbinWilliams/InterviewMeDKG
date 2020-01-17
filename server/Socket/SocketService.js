@@ -1,32 +1,32 @@
 class Socket {
-  setIO(io) {
-    this.io = io;
-    this.rooms = {};
-    //Server listeners
-    io.on("connection", socket => this.newConnection(socket));
-    io.on("join", data => this.joinRoom(data));
-  }
-
-  // nsp here
-  newConnection(socket) {
-    //Handshake/ Confirm connection
-    socket.emit("CONNECTED", {
-      socket: socket.id,
-      message: "Successfully Connected"
-    });
-  }
-
-  notifyMessage(message) {
-    this.io.emit("sendMessage", message);
-  }
-  // should we create lobbies on the backend for these functions?
-
-  // var room = io.sockets.adapter.rooms['roomName']
-  // declare room var, then room.length
-  // if (room.length > 2) { room.pop }
-  // or on join return if check fails
+	setIO (io) {
+		this.io = io;
+		this.rooms = {};
+		//Server listeners
+		io.on ("connection", socket => {
+			this.newConnection (socket);
+			// socket.on ("join", data => this.joinRoom (socket,data));
+			socket.on ('talk', (payload) => this.talk (socket, payload));
+		});
+	}
+	
+	newConnection (socket) {
+		socket.emit ("CONNECTED", {
+			socket: socket.id,
+			message: "Successfully Connected"
+		});
+	}
+	
+	notifyMessage (message) {
+		this.io.emit ("sendMessage", message);
+	}
+	
+	talk (socket, payload) {
+		console.log (socket);
+		socket.emit('talk', {response: 'Hello!', payload});
+	}
 }
 
-const socket = new Socket();
-
+const socket = new Socket ();
+// setTimeout(socket.talk(), 1000)
 module.exports = socket;

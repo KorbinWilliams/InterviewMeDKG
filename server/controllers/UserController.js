@@ -2,6 +2,7 @@ import express from "express";
 import { Authorize } from "../middleware/authorize";
 import _userService from "../services/UserService";
 import _profileService from "../services/ProfileService";
+import socketService from '../Socket/SocketService'
 
 //PUBLIC
 export default class UserController {
