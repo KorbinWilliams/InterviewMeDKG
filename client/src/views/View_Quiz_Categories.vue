@@ -1,5 +1,5 @@
 <template>
-  <div class="container categories">
+  <div class="container quiz_categories">
     <div class="row">
       <div class="col">
         <h2 class="text-center">Quiz Categories</h2>
@@ -7,11 +7,11 @@
     </div>
 
     <div class="card-deck">
-      <categories
+      <!-- <categories
         v-for="category in categories"
         :key="category.id"
         :category="category"
-      />
+      /> -->
     </div>
   </div>
 </template>
