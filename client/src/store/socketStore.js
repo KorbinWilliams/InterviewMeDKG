@@ -8,14 +8,22 @@ export default {
 			socket = io ('//localhost:3000');
 			socket.on ('CONNECTED', data => {
 				console.log ('Connected to the server socket');
-				dispatch('talk')
+				dispatch ('talk')
 			});
 			socket.on ('talk', data => {
 				console.log (data)
 			});
+			socket.on ('getRooms')
 		}
- 		, talk ({commit}) {
-			socket.emit ('talk', {msg: 'hello!'});
+		, talk ({commit}, msg) {
+			socket.emit ('talk', {msg});
+		}
+		, getRooms ({commit}, data) {
+			if (data) {
+				commit('setRooms', data);
+				return
+			}
+			socket.emit ('getRooms');
 		}
 	}
 }

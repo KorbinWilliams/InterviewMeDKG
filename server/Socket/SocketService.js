@@ -5,8 +5,9 @@ class Socket {
 		//Server listeners
 		io.on ("connection", socket => {
 			this.newConnection (socket);
-			// socket.on ("join", data => this.joinRoom (socket,data));
-			socket.on ('talk', (payload) => this.talk (socket, payload));
+			socket.on ('join', data => this.joinRoom (socket, data));
+			socket.on ('getRooms', ()=>this.getRooms(socket));
+			socket.on ('talk', (msg) => this.talk (socket, msg));
 		});
 	}
 	
@@ -17,16 +18,19 @@ class Socket {
 		});
 	}
 	
-	notifyMessage (message) {
-		this.io.emit ("sendMessage", message);
+	joinRoom (socket, data) {
+		socket.join(data.room);
 	}
 	
-	talk (socket, payload) {
-		console.log (socket);
-		socket.emit('talk', {response: 'Hello!', payload});
+	talk (socket, msg) {
+		socket.emit ("talk", msg);
+	}
+	
+	getRooms (socket) {
+		console.log (socket, 'rooms: '+socket.rooms);
+		socket.emit()
 	}
 }
 
 const socket = new Socket ();
-// setTimeout(socket.talk(), 1000)
 module.exports = socket;
