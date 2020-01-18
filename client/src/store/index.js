@@ -1,17 +1,16 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import Axios from 'axios';
-import router from '../router/index';
+import Vue         from 'vue';
+import Vuex        from 'vuex';
+import Axios       from 'axios';
+import router      from '../router/index';
 import AuthService from '../AuthService';
 import socketStore from './socketStore';
-import profileModule from "./profileModule"
 
 Vue.use (Vuex);
 
 let base = window.location.host.includes ('localhost:8080') ? '//localhost:3000/' : '/';
 
 let api = Axios.create ({
-	baseURL: base + "api/",
+	baseURL: base + 'api/',
 	timeout: 3000,
 	withCredentials: true
 });
@@ -21,64 +20,117 @@ export default new Vuex.Store ({
 		user: {},
 		userProfile: {},
 		activeProfile: {},
-		categories: [],
-		activeQuiz: {}
+		pageData: {
+			lobbies: Array,
+			profileData: Object,
+			other: {}
+		}
 	},
 	modules: {
 		socketStore
 	},
 	mutations: {
-		setUser (state, user) {
-			state.user = user
-		},
-		resetState(state) {
+		/*
+		 * payload: {
+		 * data: -any data that is to be set in the state-
+		 * , address: '-string of the location to set the data: state[payload.address] = payload.data-'
+		 * }
+		 */
+		// setUser (state, user) {
+		// 	state.user = user
+		// },
+		resetState ( state ) {
 			state = {
 				user: {},
 				userProfile: {},
 				activeProfile: {},
 				categories: [],
 				activeQuiz: {}
-			}
-		},
-		setUserProfile(state, data) {
-			state.userProfile = data
-		},
-		setActiveProfile(state, data) {
-			state.activeProfile = data
+			};
+		}
+		// setUserProfile(state, data) {
+		// 	state.userProfile = data
+		// },
+		// setActiveProfile(state, data) {
+		// 	state.activeProfile = data
+		// }
+		
+		//Set one for setting the reference of an endpoint.
+		, setItem ( state, payload ) {
+			state[payload.address] = payload.data;
 		}
 	},
 	actions: {
+		/*
+		 * payload: {
+		 * data: -any data pertinent to the action-
+		 * , address: '-string of the location to make the api call to and where to commit the data-'
+		 * , id: -used in the api call-
+		 * , commit: '-the commit to call-'
+		 */
 		//#region -- AUTH STUFF --
-		async register ({commit, dispatch}, creds) {
+		async register ( { commit, dispatch }, creds ) {
 			try {
-				let user = await AuthService.Register(creds);
-				commit('setUser', user);
-				router.push({ name: "home" })
-			} catch (e) {
-				console.warn(e.message)
+				let user = await AuthService.Register (creds);
+				commit ('setUser', user);
+				router.push ({ name: 'home' });
+			} catch ( e ) {
+				console.warn (e.message);
 			}
 		},
-		async login ({commit, dispatch}, creds) {
+		async login ( { commit, dispatch }, creds ) {
 			try {
-				let user = await AuthService.Login(creds);
-				commit('setUser', user);
-				router.push({ name: "home" })
-			} catch (e) {
-				console.warn (e.message)
+				let user = await AuthService.Login (creds);
+				commit ('setUser', user);
+				router.push ({ name: 'home' });
+			} catch ( e ) {
+				console.warn (e.message);
 			}
 		},
-		async logout ({commit, dispatch}) {
+		async logout ( { commit, dispatch } ) {
 			try {
 				let success = await AuthService.Logout ();
-				if (!success) {
+				if ( !success ) {
 				}
 				commit ('resetState');
-				router.push ({name: "login"});
-			} catch (e) {
-				console.warn (e.message)
+				router.push ({ name: 'login' });
+			} catch ( e ) {
+				console.warn (e.message);
 			}
-		},
+		}
 		//#endregion
-		
+		, get ( { commit }, payload ) {
+			api.get ('' + payload.address)
+				.then (res => {
+					commit (payload.commit, { data: res.data, address: payload.address });
+				})
+				.catch (e => console.error (e));
+		}
+		, getOne () {}
+		, create () {}
+		, edit () {}
+		, delete () {}
 	}
-})
+});
+
+// Object-forEach Polyfill - :)
+if ( !Object.prototype.forEach ) {
+	Object.defineProperty (Object.prototype, 'forEach', {
+		value: function ( callback, thisArg ) {
+			if ( this == null ) {
+				throw new TypeError ('Not an object');
+			}
+			thisArg = thisArg || window;
+			for ( var key in this ) {
+				if ( this.hasOwnProperty (key) ) {
+					callback.call (thisArg, this[key], key, this);
+				}
+			}
+		}
+	});
+}
+
+// Object-indexOf Polyfill - :)
+function getKeyByValue ( object, value ) {
+	return Object.keys (object).find (key => object[key] === value);
+}

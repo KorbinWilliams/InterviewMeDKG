@@ -8,12 +8,9 @@ export default {
 			socket = io ('//localhost:3000');
 			socket.on ('CONNECTED', data => {
 				console.log ('Connected to the server socket');
-				dispatch ('talk')
+				socket.on ('talk', payload => this.talk(socket, data));
+				socket.on ('getRooms', payload => commit('setItem', {data: payload.rooms, address: 'lobbies'}));
 			});
-			socket.on ('talk', data => {
-				console.log (data)
-			});
-			socket.on ('getRooms')
 		}
 		, talk ({commit}, msg) {
 			socket.emit ('talk', {msg});
