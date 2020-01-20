@@ -59,7 +59,7 @@ export default {
     submitQuiz() {
       debugger;
       this.$store.dispatch("createQuiz", this.quiz.questions);
-      console.log(quiz);
+      console.log(this.quiz);
     }
   },
   components: {

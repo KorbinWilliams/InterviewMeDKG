@@ -4,6 +4,7 @@ import Axios from "axios";
 import router from "../router/index";
 import AuthService from "../AuthService";
 import socketStore from "./socketStore";
+import quizModule from "./quizModule";
 
 Vue.use(Vuex);
 
@@ -29,7 +30,8 @@ export default new Vuex.Store({
     }
   },
   modules: {
-    socketStore
+    socketStore,
+    quizModule
   },
   mutations: {
     /*

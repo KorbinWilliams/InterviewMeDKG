@@ -1,20 +1,21 @@
 let quizModule = {
   actions: {
-    async createQuiz({ commit, dispatch }, data) {
-      let res = await _api.post("quizes/", data);
-      dispatch("getQuizes", res.data);
+    async createQuiz({ commit, dispatch }, quizData) {
+      debugger;
+      let res = await api.post("quizs", quizData);
+      dispatch("get", { address: "quiz", data: res.data });
     },
     async getQuizByID({ commit, dispatch }, id) {
-      let res = await _api.get("quizes/" + id);
-      commit("setActiveQuiz", res.data);
+      let res = await api.get("quizs/" + id);
+      commit("setOne", { address: "quiz", data: res.data });
     },
     async deleteQuiz({ commit, dispatch }, id) {
-      let res = await _api.delete("quizes/" + id);
-      dispatch("getQuizes");
+      let res = await api.delete("quizs/" + id);
+      dispatch("get", { address: "quiz", data: res.data });
     },
-    async editQuiz({ commit, dispatch }, id) {
-      let res = await _api.put("quizes/", id);
-      dispatch("getQuizes");
+    async editQuiz({ commit, dispatch }, id, quizData) {
+      let res = await api.put("quizs/", +id);
+      commit9("setItem", { address: "quiz", data: res.data });
     }
   }
 };
