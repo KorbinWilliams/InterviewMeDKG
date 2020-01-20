@@ -48,6 +48,7 @@ export default new Vuex.Store({
 			state = {
 				user: {},
 				profile: {},
+				quiz: {},
 				pageData: {
 					lobbies: Array,
 					profileData: Object,
