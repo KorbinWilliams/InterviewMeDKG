@@ -43,8 +43,7 @@ class Socket {
 		
 		let today = getDate ();
 		fs.writeFileSync ('./text_chat/' + Object.keys (socket.rooms)[0] + '~' + today + '.json', JSON.stringify ({
-			user : socket.username
-			, message : data.message
+			message : data.message
 			, time : getDate (true)
 		}), function ( error ) {
 			handlE (error);

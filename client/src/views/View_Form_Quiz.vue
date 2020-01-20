@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     addQuestion() {
-      debugger;
+      // debugger;
       this.quiz.questions.push(this.question);
       this.question = {
         description: "",
@@ -57,9 +57,9 @@ export default {
       };
     },
     submitQuiz() {
-      debugger;
+      // debugger;
       this.$store.dispatch("createQuiz", this.quiz.questions);
-      console.log(this.quiz);
+      // console.log(this.quiz);
     }
   },
   components: {
