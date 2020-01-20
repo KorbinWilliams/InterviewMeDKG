@@ -30,7 +30,7 @@ export default {
   },
   beforeCreate() {
     if (this.$store.state.user._id) {
-      this.$router.push({ name: "boards" });
+      this.$router.push({ name: "/" });
     }
   },
   methods: {
@@ -52,4 +52,3 @@ export default {
 <style>
 @import "../assets/styles/View_Login.css";
 </style>
-

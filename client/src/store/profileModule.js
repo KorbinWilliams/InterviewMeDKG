@@ -5,31 +5,29 @@ let profileModule = {
   actions: {
     async createUserProfile({ commit, dispatch }, userData) {
       let res = await api.post("profiles", userData)
-      commit("setUserProfile", res.data)
+      commit("setOne", { address: "profile", data: res.data })
       dispatch("getProfileByAuthorId")
     },
 
     async getProfileByAuthorId({ commit, dispatch }, id) {
       let res = await api.get("users/" + id + "/profiles")
-      commit("setUserProfile", res.data)
+      commit("setOne", { address: "user", data: res.data })
     },
 
     async getProfileById({ commit, dispatch }, id) {
       let res = await api.get("profiles/" + id)
-      commit("setActiveProfile", res.data)
+      commit("setOne", { address: "user", data: res.data })
+
     },
 
-    // @click = setActiveProfile 
-    // retrieve userProfile on login 
+    // @click = setActiveProfile
+    // retrieve userProfile on login
 
 
     async saveProfile({ commit, dispatch }, id, profileSettings) {
-      let res = await api.put("profiles/" + id)
-      commit("setUserProfile", res.data)
+      let res = await api.put("profiles/" + id);
+      commit("setItem", { address: "user", data: res.data });
     }
   }
-
-  // make new property on use Schema for userId
-
-}
-export default profileModule
+};
+export default profileModule;

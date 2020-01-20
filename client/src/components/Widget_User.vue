@@ -19,6 +19,9 @@
       <md-menu-item>
         <router-link to="home" tag="a">Home</router-link>
       </md-menu-item>
+      <md-menu-item>
+        <router-link to="quiz_form" tag="a">Create Quiz</router-link>
+      </md-menu-item>
       <button type="button" @click="logOut" id="btn-log-out">Log Out</button>
     </md-menu-content>
   </md-menu>
