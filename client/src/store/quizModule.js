@@ -1,7 +1,7 @@
 let quizModule = {
   actions: {
     async createQuiz({ commit, dispatch }, quizData) {
-      debugger;
+      // debugger;
       let res = await api.post("quizs", quizData);
       dispatch("get", { address: "quiz", data: res.data });
     },

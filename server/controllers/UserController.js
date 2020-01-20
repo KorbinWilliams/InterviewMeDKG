@@ -14,7 +14,8 @@ export default class UserController {
       .use(Authorize.authenticated)
       .get("/authenticate", this.authenticate)
       .delete("/logout", this.logout)
-      .use(this.defaultRoute);
+      .get("/:id/profile", this.getProfileByUserId)
+      .use(this.defaultRoute)
   }
 
   defaultRoute(req, res, next) {
@@ -67,11 +68,14 @@ export default class UserController {
     }
   }
 
-  async getProfileByUserEmail(req, res, next) {
+  async getProfileByUserId(req, res, next) {
     try {
-      let data = _profileService.getProfileByUserEmail(req.body.email)
+      let data = _profileService.getProfileByUserId(req.body.userId)
+      return res.send(data)
     } catch (error) {
       next(error)
     }
   }
 }
+
+// try instantiating profile function with no params

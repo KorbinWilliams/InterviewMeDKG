@@ -15,9 +15,7 @@
           />
           <label for="answer">Question Answer</label>
           <input type="text" id="answer" v-model="question.answer" />
-          <button type="submit">
-            Add Question
-          </button>
+          <button type="submit">Add Question</button>
         </form>
       </div>
       <div class="row">
@@ -49,7 +47,7 @@ export default {
   },
   methods: {
     addQuestion() {
-      debugger;
+      // debugger;
       this.quiz.questions.push(this.question);
       this.question = {
         description: "",

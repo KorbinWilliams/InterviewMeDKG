@@ -8,10 +8,11 @@ const Profile = new Schema(
     email: { type: String, required: true },
     userImage: { type: String },
     jobTitle: { type: String },
-    jobSkills: { type: String, required: true },
+    jobSkills: { type: String },
     interviewerStatus: { type: Boolean, default: true },
     intervieweeStatus: { type: Boolean, default: true },
-    authorId: { type: ObjectId, ref: "User", required: true }
+    authorId: { type: ObjectId, ref: "User", required: true },
+    userId: { type: ObjectId, ref: "User", required: true }
   },
   { timestamps: true }
 );
