@@ -7,7 +7,12 @@
           <label for="category">Category</label>
           <Dropdown />
           <label for="description">Quiz Question</label>
-          <input type="text" id="description" v-model="question.description" required />
+          <input
+            type="text"
+            id="description"
+            v-model="question.description"
+            required
+          />
           <label for="answer">Question Answer</label>
           <input type="text" id="answer" v-model="question.answer" />
           <button type="submit">Add Question</button>
@@ -50,9 +55,9 @@ export default {
       };
     },
     submitQuiz() {
-      // debugger;
-      this.$store.dispatch("createQuiz", this.quiz.questions);
-      // console.log(this.quiz);
+      debugger;
+      this.$store.dispatch("createQuiz", this.quiz);
+      console.log(this.quiz);
     }
   },
   components: {

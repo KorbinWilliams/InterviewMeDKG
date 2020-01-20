@@ -34,9 +34,6 @@ export default {
     }
   },
   methods: {
-    // trying to get userProfile without getAllProfiles first
-    // trying without any params
-
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
         this.$store.dispatch(
