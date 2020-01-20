@@ -51,7 +51,7 @@ export default new Vuex.Store({
 				quiz: {},
 				pageData: {
 					lobbies: Array,
-					profileData: Object,
+					profileData: Array,
 					chat: [],
 					currentLobby: Object,
 					other: {}

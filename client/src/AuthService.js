@@ -1,4 +1,5 @@
 import Axios from 'axios'
+import store from "./store";
 
 let baseUrl = location.host.includes ('localhost') ? '//localhost:3000/' : '/';
 

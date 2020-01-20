@@ -6,7 +6,7 @@
         <label for="text-chat-input"/>
         <input type="text" id="text-chat-input">
         <button type="button" @click="talk">Send</button>
-        <button type="button" @click="this.$store.dispatch('joinLobby')">Join</button>
+        <button type="button" @click="getLobbies">Join</button>
     </section>
 </template>
 
@@ -23,6 +23,9 @@
 				let message = document.getElementById ('text-chat-input').value;
 				if ( !message ) return;
 				this.$store.dispatch ('send', message);
+			}
+			, getLobbies () {
+				this.$store.dispatch('getLobbies')
 			}
 		}
 

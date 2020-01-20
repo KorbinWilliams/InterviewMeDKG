@@ -3,42 +3,46 @@ import io from 'socket.io-client';
 let socket = {};
 
 export default {
-	actions : {
-		initializeSocket ( { commit, dispatch, rootState } ) {
+	actions: {
+		initializeSocket ({commit, dispatch, rootState}) {
 			socket = io ('//localhost:3000');
 			socket.on ('CONNECTED', data => {
 				console.log ('Connected to the server socket');
 				socket.on ('receive', payload => this.dispatch ('receive', (payload)));
-				socket.on ('getRooms', payload => commit ('setItem', { data : payload.rooms, address : 'lobbies' }));
+				socket.on ('getLobbies', payload => commit ('setItem', {data: payload, address: 'lobbies'}));
 			});
 		}
-		, setId ( { rootState } ) {
-			socket.emit ('setId', { username : rootState.user.name, uid : rootState.user._id });
-		}
-		, receive ( { rootState }, msg ) {
-			console.log (msg);
+		, receive ({rootState}, msg) {
+			// console.log (msg);
 			rootState.pageData.chat.push (msg);
 		}
-		, send ( { rootState }, msg ) {
-			socket.username = rootState.user.name;
-			socket.uid = rootState.user._id;
+		, send ({rootState}, msg) {
 			// console.log ();
-			socket.emit ('send', { message : msg });
+			socket.emit ('send', {uid: rootState.user._id, message: msg});
 		}
-		, getLobbies ( { commit }, socket, data ) {
-			if ( data ) {
-				commit ('setPageData', { address : 'lobbies', data : data });
-				return;
-			}
+		, getLobbies ({commit}) {
 			socket.emit ('getLobbies');
 		}
-		, createRoom ( { commit, rootState }, socket ) {
-			socket.emit ('createLobby', rootState.user._id);
+		, createLobby ({commit, rootState}, socket) {
+			socket.emit ('createLobby', {
+				uid: rootState.user._id
+				,user: rootState.profile
+				,lobbyData: {
+					title: '',
+					description: ''
+				}});
 		}
-		, exitLobby ( { state }, lobbyId ) {
-		
+		, exitLobby ({rootState}, lobbyId) {
+			socket.emit('exitLobby', {
+				uid: rootState.user._id
+				, lobbyId
+			})
 		}
-		, join ( { rootState }, lobbyId ) {
+		, join ({rootState}, lobbyId) {
+			socket.emit('join', {
+				uid: rootState.user._id
+				, lobbyId
+			})
 		}
 	}
 };
