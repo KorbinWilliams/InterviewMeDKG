@@ -5,14 +5,8 @@
         <h2 class="text-center">Lets Create a Quiz!</h2>
         <form @submit.prevent="addQuestion">
           <label for="category">Category</label>
-          <Dropdown />
           <label for="description">Quiz Question</label>
-          <input
-            type="text"
-            id="description"
-            v-model="question.description"
-            required
-          />
+          <input type="text" id="description" v-model="question.description" required />
           <label for="answer">Question Answer</label>
           <input type="text" id="answer" v-model="question.answer" />
           <button type="submit">Add Question</button>
@@ -28,8 +22,6 @@
 </template>
 
 <script>
-import Dropdown from "@/components/Category_Dropdown";
-
 export default {
   name: "View_Form_Quiz",
   data() {
@@ -47,7 +39,6 @@ export default {
   },
   methods: {
     addQuestion() {
-      // debugger;
       this.quiz.questions.push(this.question);
       this.question = {
         description: "",
@@ -60,9 +51,7 @@ export default {
       console.log(this.quiz);
     }
   },
-  components: {
-    Dropdown
-  }
+  components: {}
 };
 </script>
 
