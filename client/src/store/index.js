@@ -50,7 +50,7 @@ export default new Vuex.Store({
 				profile: {},
 				pageData: {
 					lobbies: Array,
-					profileData: Object,
+					profileData: Array,
 					chat: [],
 					currentLobby: Object,
 					other: {}
