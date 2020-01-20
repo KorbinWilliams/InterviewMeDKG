@@ -31,13 +31,13 @@ export default new Router({
       name: "profile",
       component: View_Profile
     },
-    // {
-    //   path: "/text_categories",
-    //   name: "View_Text_Lobbies",
-    //   component: View_Text_Lobbies
-    // },
     {
       path: "/text_categories",
+      name: "View_Text_Lobbies",
+      component: View_Text_Lobbies
+    },
+    {
+      path: "/text_lobby",
       name: "View_Text_Lobby",
       component: View_Text_Lobby
     },
