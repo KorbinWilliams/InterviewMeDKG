@@ -13,7 +13,7 @@ import 'vue-material/dist/theme/default.css';
 
 async function init() {
   let user = await AuthService.Authenticate();
-  if (user) { store.commit("setItem", {address: 'user', data: user}) }
+  if (user) { store.commit("setItem", { address: 'user', data: user }) }
   else { router.push({ name: 'login' }) }
   new Vue({
     router,

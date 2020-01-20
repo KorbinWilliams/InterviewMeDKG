@@ -25,7 +25,7 @@ export default new Vuex.Store({
 		profile: {},
 		pageData: {
 			lobbies: Array,
-			profileData: Object,
+			profileData: Array,
 			chat: [],
 			other: {}
 		}
@@ -48,6 +48,7 @@ export default new Vuex.Store({
 			state = {
 				user: {},
 				profile: {},
+				quiz: {},
 				pageData: {
 					lobbies: Array,
 					profileData: Array,
@@ -78,6 +79,9 @@ export default new Vuex.Store({
 			} else {
 				state.pageData[payload.address] = payload.data;
 			}
+		},
+		removeItem(state, payload) {
+			state[payload.address].filter(item => item._id = payload.data._id)
 		}
 	},
 	actions: {
@@ -131,10 +135,41 @@ export default new Vuex.Store({
 				})
 				.catch(e => console.error(e));
 		},
-		getOne({ commit }, payload) { },
-		create({ commit }, payload) { },
-		edit({ commit }, payload) { },
-		delete({ commit }, payload) { }
+		getOne({ commit }, payload) {
+			api.get("" + payload.address + "/" + payload.data._id).then(res => {
+				commit(payload.commit, {
+					data: res.data,
+					address: payload.commitAddress
+				})
+			})
+				.catch(e => console.error(e))
+		},
+		create({ commit }, payload) {
+			api.post("" + payload.address).then(res => {
+				commit(payload.commit, {
+					data: res.data,
+					address: payload.commitAddress
+				})
+			})
+				.catch(e => console.error(e))
+		},
+		edit({ commit }, payload) {
+			api.put("" + payload.address + "/" + payload.data._id).then(res => {
+				commit(payload.commit, {
+					data: res.data,
+					address: payload.commitAddress
+				})
+			})
+				.catch(e => console.error(e))
+		},
+		delete({ commit }, payload) {
+			api.delete("" + payload.address + "/" + payload.data._id).then(res => {
+				commit(payload.commit, {
+					data: res.data,
+					address: payload.commitAddress
+				})
+			})
+		}
 	}
 });
 
