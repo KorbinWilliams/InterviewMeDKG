@@ -58,7 +58,7 @@ export default {
     },
     submitQuiz() {
       debugger;
-      this.$store.dispatch("createQuiz", this.quiz.questions);
+      this.$store.dispatch("createQuiz", this.quiz);
       console.log(this.quiz);
     }
   },
