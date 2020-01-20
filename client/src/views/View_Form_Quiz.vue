@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12 status">
         <h2 class="text-center">Lets Create a Quiz!</h2>
-        <form @submit.prevent="submitQuestion">
+        <form @submit.prevent="addQuestion">
           <label for="category">Category</label>
           <Dropdown />
           <label for="description">Quiz Question</label>
@@ -16,13 +16,15 @@
           <label for="answer">Question Answer</label>
           <input type="text" id="answer" v-model="question.answer" />
           <button type="submit">
-            Submit Question
+            Add Question
           </button>
         </form>
       </div>
-    </div>
-    <div class="row">
-      <div class="col"></div>
+      <div class="row">
+        <div class="col">
+          <button @click="submitQuiz">Submit Quiz</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -46,13 +48,18 @@ export default {
     };
   },
   methods: {
-    submitQuestion() {
+    addQuestion() {
       debugger;
       this.quiz.questions.push(this.question);
       this.question = {
         description: "",
         answer: ""
       };
+    },
+    submitQuiz() {
+      debugger;
+      this.$store.dispatch("createQuiz", this.quiz.questions);
+      console.log(quiz);
     }
   },
   components: {
