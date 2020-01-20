@@ -36,10 +36,7 @@ export default {
   methods: {
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        this.$store.dispatch(
-          "getProfileByAuthorId",
-          this.$store.state.user._id
-        );
+        this.$store.dispatch("getProfileByUserId", this.$store.state.user._id);
       });
     }
   }

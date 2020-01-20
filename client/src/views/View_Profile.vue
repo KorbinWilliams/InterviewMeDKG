@@ -1,10 +1,13 @@
 <template>
-  <div class="container profile">
+  <div class="container profile bg-profile">
+    <div class="row">
+      <Widget_User />
+    </div>
     <div class="row">
       <div class="col-offset-4">
-        <img src alt="User Image" />
-        <!-- special way of displaying imgs using vue? -->
+        <img :src="profileSettings.userImage" alt="User Image" />
         <form>
+          <label for="Set User Image"></label>
           <input type="text" v-model="profileSettings.userImage" />
         </form>
       </div>
@@ -40,7 +43,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col">
+      <div class="col justify-content-center">
         <button @submit="saveProfile">Save Profile Settings</button>
       </div>
     </div>
@@ -48,6 +51,8 @@
 </template>
 
 <script>
+import Widget_User from "../components/Widget_User";
+
 export default {
   name: "View_Profile",
   props: [],
@@ -64,9 +69,7 @@ export default {
       }
     };
   },
-  mounted() {
-    this.$store.dispatch("getUserProfile");
-  },
+  // mounted() {},
   computed: {
     profiles() {
       this.$store.state.userProfile;
@@ -76,8 +79,15 @@ export default {
     saveProfile() {
       this.$store.dispatch("editProfile", profileSettings);
     }
+  },
+  components: {
+    Widget_User
   }
 };
 </script>
 
-<style></style>
+<style>
+.bg-profile {
+  background-color: mediumseagreen;
+}
+</style>
