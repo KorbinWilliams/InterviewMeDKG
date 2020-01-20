@@ -17,13 +17,13 @@ let api = Axios.create ({
 
 export default new Vuex.Store ({
 	state: {
-		user: {},
-		userProfile: {},
-		activeProfile: {},
-		pageData: {
-			lobbies: Array,
-			profileData: Object,
-			other: {}
+		user: {}
+		, profile: {}
+		, pageData: {
+			lobbies: Array
+			,profileData: Object
+			,chat: []
+			,other: {}
 		}
 	},
 	modules: {
@@ -41,11 +41,15 @@ export default new Vuex.Store ({
 		// },
 		resetState ( state ) {
 			state = {
-				user: {},
-				userProfile: {},
-				activeProfile: {},
-				categories: [],
-				activeQuiz: {}
+				user: {}
+				, profile: {}
+				, pageData: {
+					lobbies: Array
+					,profileData: Object
+					,chat: []
+					,currentLobby: Object
+					,other: {}
+				}
 			};
 		}
 		// setUserProfile(state, data) {
@@ -59,14 +63,24 @@ export default new Vuex.Store ({
 		, setItem ( state, payload ) {
 			state[payload.address] = payload.data;
 		}
+		, setPageData ( state, payload ) {
+			if ( payload.thirdAddress && payload.secondAddress ) {
+				state.pageData[payload.address][payload.secondAddress][payload.thirdAddress] = payload.data;
+			} else if ( payload.secondAddress ) {
+				state.pageData[payload.address][payload.secondAddress] = payload.data;
+			} else {
+				state.pageData[payload.address] = payload.data;
+			}
+		}
 	},
 	actions: {
 		/*
 		 * payload: {
 		 * data: -any data pertinent to the action-
-		 * , address: '-string of the location to make the api call to and where to commit the data-'
+		 * , address: '-string of the location to make the api call-'
 		 * , id: -used in the api call-
 		 * , commit: '-the commit to call-'
+		 * , commitAddress: '-the place to commit to-'
 		 */
 		//#region -- AUTH STUFF --
 		async register ( { commit, dispatch }, creds ) {
@@ -102,14 +116,18 @@ export default new Vuex.Store ({
 		, get ( { commit }, payload ) {
 			api.get ('' + payload.address)
 				.then (res => {
-					commit (payload.commit, { data: res.data, address: payload.address });
+					commit (payload.commit, { data: res.data, address: payload.commitAddress });
 				})
 				.catch (e => console.error (e));
 		}
-		, getOne () {}
-		, create () {}
-		, edit () {}
-		, delete () {}
+		, getOne ( { commit }, payload ) {
+		}
+		, create ( { commit }, payload ) {
+		}
+		, edit ( { commit }, payload ) {
+		}
+		, delete ( { commit }, payload ) {
+		}
 	}
 });
 

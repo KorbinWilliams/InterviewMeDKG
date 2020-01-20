@@ -38,7 +38,7 @@ export default {
   methods: {
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        dispatch("getUserProfile");
+        this.$store.dispatch("getUserProfile");
       });
     }
   }
