@@ -11,9 +11,7 @@
       </form>
       <p>
         Don't have an account?
-        <router-link to="/sign_up" tag="h6" id="sign-up"
-          >Create One</router-link
-        >
+        <router-link to="/sign_up" tag="h6" id="sign-up">Create One</router-link>
       </p>
     </div>
   </div>
@@ -36,9 +34,15 @@ export default {
     }
   },
   methods: {
+    // trying to get userProfile without getAllProfiles first
+    // trying without any params
+
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        this.$store.dispatch("getUserProfile");
+        this.$store.dispatch(
+          "getProfileByAuthorId",
+          this.$store.state.user._id
+        );
       });
     }
   }

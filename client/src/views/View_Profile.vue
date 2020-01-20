@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-offset-4">
         <img src alt="User Image" />
+        <!-- special way of displaying imgs using vue? -->
         <form>
           <input type="text" v-model="profileSettings.userImage" />
         </form>
@@ -50,23 +51,25 @@
 export default {
   name: "View_Profile",
   props: [],
-  data: {
-    profileSettings: {
-      name: "",
-      email: "",
-      userImage: "",
-      jobTitle: "",
-      jobSkills: "",
-      InterviewerStatus: "",
-      intervieweeStatus: ""
-    }
+  data() {
+    return {
+      profileSettings: {
+        name: "",
+        email: "",
+        userImage: "",
+        jobTitle: "",
+        jobSkills: "",
+        InterviewerStatus: "",
+        intervieweeStatus: ""
+      }
+    };
   },
   mounted() {
     this.$store.dispatch("getUserProfile");
   },
   computed: {
-    profile() {
-      this.$store.state.activeProfile;
+    profiles() {
+      this.$store.state.userProfile;
     }
   },
   methods: {

@@ -76,9 +76,12 @@ export default {
         return;
       }
 
-      this.$store
-        .dispatch("register", this.creds)
-        .then(res => this.$store.dispatch("createUserProfile", this.creds));
+      this.$store.dispatch("register", this.creds).then(res =>
+        this.$store.dispatch("createUserProfile", {
+          name: this.$store.state.user.name,
+          email: this.$store.state.user.email
+        })
+      );
     }
   }
 };

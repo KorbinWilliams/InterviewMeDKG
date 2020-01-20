@@ -19,6 +19,7 @@ class UserService {
     //CREATE THE USER
     let user = await _repository.create(body)
     //REMOVE THE PASSWORD BEFORE RETURNING
+    // @ts-ignore
     delete user._doc.hash
     return user
   }
@@ -34,6 +35,7 @@ class UserService {
       throw new ApiError("Invalid Username Or Password")
     }
     //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
+    // @ts-ignore
     delete user._doc.hash
     return user
   }
@@ -43,6 +45,7 @@ class UserService {
     if (!user) {
       throw new ApiError("Please login to continue", 401)
     }
+    // @ts-ignore
     delete user._doc.hash
     return user
   }

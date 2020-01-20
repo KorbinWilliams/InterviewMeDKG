@@ -5,14 +5,21 @@ import ApiError from "../utils/ApiError";
 const _repository = mongoose.model("Profile", Profile);
 
 class ProfileService {
-  async create(body) {
-    let data = await _repository.create(body.name, body.email);
+  async getAll() {
+    let data = await _repository.find()
     return data;
   }
-  async getProfileByUserEmail(email) {
-    let data = await _repository.findOne({ email })
+
+  async getProfileByUserId(userId) {
+    let data = await _repository.findOne({ userId })
     return data
   }
+
+  async create(body) {
+    let data = await _repository.create(body);
+    return data;
+  }
+
   async getById(id) {
     let data = await _repository.findOne({ _id: id });
     if (!data) {
