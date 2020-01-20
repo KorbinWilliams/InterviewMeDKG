@@ -7,12 +7,7 @@
           <label for="category">Category</label>
           <input type="text" id="category" v-model="quiz.category" />
           <label for="description">Quiz Question</label>
-          <input
-            type="text"
-            id="description"
-            v-model="question.description"
-            required
-          />
+          <input type="text" id="description" v-model="question.description" required />
           <label for="answer">Quiz Answer</label>
           <input type="text" id="answer" v-model="question.answer" />
         </form>
@@ -28,7 +23,8 @@
 
 <script>
 export default {
-  name: "View_Form_Quiz"
+  name: "View_Form_Quiz",
+  data: {}
 };
 </script>
 

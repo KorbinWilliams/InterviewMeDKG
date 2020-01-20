@@ -34,9 +34,15 @@ export default {
     }
   },
   methods: {
+    // trying to get userProfile without getAllProfiles first
+    // trying without any params
+
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        dispatch("getUserProfile");
+        this.$store.dispatch(
+          "getProfileByAuthorId",
+          this.$store.state.user._id
+        );
       });
     }
   }
@@ -46,3 +52,4 @@ export default {
 <style>
 @import "../assets/styles/View_Login.css";
 </style>
+

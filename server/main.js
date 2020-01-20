@@ -48,10 +48,8 @@ server.use("/account", new UserController().router);
 //YOUR ROUTES HERE!!!!!!
 import QuizController from "./controllers/QuizController";
 import ProfileController from "./controllers/ProfileController";
-import CategoryController from "./controllers/CategoryController";
 server.use("/api/quizs", new QuizController().router);
 server.use("/api/profiles", new ProfileController().router);
-server.use("/api/categories", new CategoryController().router);
 
 //NOTE Default error handler, catches all routes with an error attached
 server.use((error, req, res, next) => {
