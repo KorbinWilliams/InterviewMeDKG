@@ -150,12 +150,13 @@ export default new Vuex.Store({
         .catch(e => console.error(e));
     },
     create({ commit }, payload) {
+      debugger;
       api
-        .post("" + payload.address)
+        .post("" + payload.address, payload.data)
         .then(res => {
           commit(payload.commit, {
             data: res.data,
-            address: payload.address
+            address: payload.commitAddress
           });
         })
         .catch(e => console.error(e));
@@ -166,7 +167,7 @@ export default new Vuex.Store({
         .then(res => {
           commit(payload.commit, {
             data: res.data,
-            address: payload.address
+            address: payload.commitAddress
           });
         })
         .catch(e => console.error(e));

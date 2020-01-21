@@ -21,22 +21,22 @@ export default {
   name: "View_Categories",
   mounted() {
     this.$store.dispatch("getLobbies");
-	},
+  },
   computed: {
     lobbies() {
       return this.$store.state.pageData.lobbies;
     }
   },
   methods: {
-		joinLobby() {
-			dispatch("setItem", {
-				data: ,
-				address: ,
-			}).then(res => {
-				// add profile data to pageData?
-			})
-		}
-	},
+    joinLobby() {
+      dispatch("setItem", {
+        data: "",
+        address: ""
+      }).then(res => {
+        // add profile data to pageData?
+      });
+    }
+  },
   components: {
     Create_Lobby_Modal
   }
