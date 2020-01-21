@@ -4,7 +4,12 @@
     <div class="lobby" v-for="lobby in lobbies" :id="lobby._id">
       <h2>{{ lobby.owner }}</h2>
       <p>{{ lobby.description }}</p>
-      <button type="button" @click="this.$store.dispatch('joinLobbies', lobby._id)">Join</button>
+      <button
+        type="button"
+        @click="this.$store.dispatch('joinLobbies', lobby._id)"
+      >
+        Join
+      </button>
     </div>
   </div>
 </template>

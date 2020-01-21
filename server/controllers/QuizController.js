@@ -7,6 +7,7 @@ export default class QuizController {
   constructor() {
     this.router = express
       .Router()
+      .get("", this.getAll)
       .get("/:id", this.getById)
       .use(Authorize.authenticated)
       .post("", this.create)
@@ -17,6 +18,15 @@ export default class QuizController {
 
   defaultRoute(req, res, next) {
     next({ status: 404, message: "No Such Route" });
+  }
+
+  async getAll(req, res, next) {
+    try {
+      let data = await _quizService.getAll();
+      return data;
+    } catch (error) {
+      next(error);
+    }
   }
 
   async getById(req, res, next) {
