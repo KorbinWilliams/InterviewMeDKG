@@ -28,14 +28,14 @@ export default {
     }
   },
   methods: {
-    joinLobby() {
-      dispatch("setItem", {
-        data: "",
-        address: ""
-      }).then(res => {
-        // add profile data to pageData?
-      });
-    }
+    // joinLobby() {
+    // 	dispatch("setItem", {
+    // 		data: ,
+    // 		address: ,
+    // 	}).then(res => {
+    // 		// add profile data to pageData?
+    // 	})
+    // }
   },
   components: {
     Create_Lobby_Modal

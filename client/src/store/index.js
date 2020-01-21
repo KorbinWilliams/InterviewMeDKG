@@ -120,8 +120,9 @@ export default new Vuex.Store({
         let success = await AuthService.Logout();
         if (!success) {
         }
-        commit("resetState");
-        router.push({ name: "login" });
+        commit("resetState").then(res => {
+          router.push({ name: "login" });
+        });
       } catch (e) {
         console.warn(e.message);
       }
@@ -149,8 +150,25 @@ export default new Vuex.Store({
         })
         .catch(e => console.error(e));
     },
+    getOneByAnother({ commit }, payload) {
+      api
+        .get(
+          "" +
+            payload.address1 +
+            "/" +
+            payload.data._id +
+            "/" +
+            payload.address2
+        )
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        });
+      // for using ref's. address 1 is where the id/ref comes from, address 2 is what youre looking for, commitAddress is where it's going in the state.
+    },
     create({ commit }, payload) {
-      debugger;
       api
         .post("" + payload.address, payload.data)
         .then(res => {
@@ -163,7 +181,10 @@ export default new Vuex.Store({
     },
     edit({ commit }, payload) {
       api
-        .put("" + payload.address + "/" + payload.data._id)
+        .put(
+          "" + payload.address + "/" + payload.data._id || payload._id,
+          payload.data
+        )
         .then(res => {
           commit(payload.commit, {
             data: res.data,

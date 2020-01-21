@@ -36,7 +36,12 @@ export default {
   methods: {
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        this.$store.dispatch("getProfileByUserId", this.$store.state.user._id);
+        this.$store.dispatch("getOneByAnother", {
+          data: { _id: this.$store.state.user._id },
+          commitAddress: "profile",
+          address1: "users",
+          address2: "profiles"
+        });
       });
     }
   }
@@ -46,3 +51,4 @@ export default {
 <style>
 @import "../assets/styles/View_Login.css";
 </style>
+
