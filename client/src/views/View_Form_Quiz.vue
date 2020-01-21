@@ -110,8 +110,6 @@ export default {
       });
       this.rows = "";
       this.quiz = "";
-
-      console.log(this.quiz);
     }
   },
   components: {
