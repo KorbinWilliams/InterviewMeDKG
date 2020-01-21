@@ -39,7 +39,7 @@ export default new Router({
       component: View_Profile
     },
     {
-      path: "/text_categories",
+      path: "/text_lobbies",
       name: "View_Text_Lobbies",
       component: View_Text_Lobbies
     },

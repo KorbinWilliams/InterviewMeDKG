@@ -24,6 +24,7 @@ export default new Vuex.Store({
 		user: {},
 		profile: {},
 		quiz: {},
+		lobby: {},
 		pageData: {
 			lobbies: Array,
 			profileData: Array,
@@ -50,13 +51,11 @@ export default new Vuex.Store({
 				user: {},
 				profile: {},
 				quiz: {},
-				quizzes: [],
-				quizCategories: [],
+				lobby: {},
 				pageData: {
 					lobbies: Array,
 					profileData: Array,
 					chat: [],
-					currentLobby: Object,
 					other: {}
 				}
 			};
@@ -149,7 +148,7 @@ export default new Vuex.Store({
 		},
 		create({ commit }, payload) {
 			api.post("" + payload.address).then(res => {
-				commit(payload.commit, {
+				commit(payload.commit , {
 					data: res.data,
 					address: payload.address
 				})
