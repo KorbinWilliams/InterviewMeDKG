@@ -77,7 +77,13 @@ export default {
   },
   methods: {
     saveProfile() {
-      this.$store.dispatch("editProfile", profileSettings);
+      this.$store.dispatch("edit", {
+        data: this.profileSettings,
+        _id: this.$store.state.profile._id,
+        address: "profiles",
+        commit: "setItem",
+        commitAdress: "profile"
+      });
     }
   },
   components: {

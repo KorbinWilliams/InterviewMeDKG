@@ -36,10 +36,11 @@ export default {
   methods: {
     loginUser() {
       this.$store.dispatch("login", this.creds).then(res => {
-        this.$store.dispatch("getOne", {
-          data: this.$store.state.user._id,
-          address1: "user",
-          address2: "profile"
+        this.$store.dispatch("getOneByAnother", {
+          data: { _id: this.$store.state.user._id },
+          commitAddress: "profile",
+          address1: "users",
+          address2: "profiles"
         });
       });
     }
@@ -51,8 +52,3 @@ export default {
 @import "../assets/styles/View_Login.css";
 </style>
 
-
-    async getProfileByUserId({ commit, dispatch }, id) {
-      let res = await api.get("users/" + id + "/profiles")
-      commit("setItem", { address: "user", data: res.data })
-    },

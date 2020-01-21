@@ -77,10 +77,15 @@ export default {
       }
 
       this.$store.dispatch("register", this.creds).then(res =>
-        this.$store.dispatch("createUserProfile", {
-          name: this.$store.state.user.name,
-          email: this.$store.state.user.email,
-          userId: this.$store.state.user._id
+        this.$store.dispatch("create", {
+          data: {
+            name: this.$store.state.user.name,
+            email: this.$store.state.user.email,
+            userId: this.$store.state.user._id
+          },
+          address: "profiles",
+          commit: "setItem",
+          commitAddress: "profile"
         })
       );
     }
