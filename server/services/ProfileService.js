@@ -11,7 +11,7 @@ class ProfileService {
   }
 
   async getProfileByUserId(userId, uid) {
-    let data = await _repository.find({ userId, authorId: uid })
+    let data = await _repository.findOne({ userId, authorId: uid })
     return data
   }
 
