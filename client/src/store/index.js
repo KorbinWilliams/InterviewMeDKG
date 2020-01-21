@@ -23,8 +23,9 @@ export default new Vuex.Store({
 	state: {
 		user: {},
 		profile: {},
-		quiz: {},
 		lobby: {},
+		quiz: {},
+		question: [],
 		pageData: {
 			lobbies: Array,
 			profileData: Array,
@@ -43,29 +44,32 @@ export default new Vuex.Store({
      * , address: '-string of the location to set the data: state[payload.address] = payload.data-'
      * }
      */
-		// setUser (state, user) {
-		// 	state.user = user
-		// },
-		resetState(state) {
-			state = {
-				user: {},
-				profile: {},
-				quiz: {},
-				lobby: {},
-				pageData: {
-					lobbies: Array,
-					profileData: Array,
-					chat: [],
-					other: {}
-				}
-			};
-		},
-		// setUserProfile(state, data) {
-		// 	state.userProfile = data
-		// },
-		// setActiveProfile(state, data) {
-		// 	state.activeProfile = data
-		// }
+    // setUser (state, user) {
+    // 	state.user = user
+    // },
+    resetState(state) {
+      state = {
+        user: {},
+        profile: {},
+        quiz: {},
+	    lobby: {},
+        quizzes: [],
+        quizCategories: [],
+        pageData: {
+          lobbies: Array,
+          profileData: Array,
+          chat: [],
+          currentLobby: Object,
+          other: {}
+        }
+      };
+    },
+    // setUserProfile(state, data) {
+    // 	state.userProfile = data
+    // },
+    // setActiveProfile(state, data) {
+    // 	state.activeProfile = data
+    // }
 
 		//Set one for setting the reference of an endpoint.
 		setItem(state, payload) {
@@ -95,84 +99,118 @@ export default new Vuex.Store({
      * , commit: '-the commit to call-'
      * , commitAddress: '-the place to commit to-'
      */
-		//#region -- AUTH STUFF --
-		async register({ commit, dispatch }, creds) {
-			try {
-				let user = await AuthService.Register(creds);
-				commit("setUser", user);
-				router.push({ name: "home" });
-			} catch (e) {
-				console.warn(e.message);
-			}
-		},
-		async login({ commit, dispatch }, creds) {
-			try {
-				let user = await AuthService.Login(creds);
-				commit("setUser", user);
-				router.push({ name: "home" });
-			} catch (e) {
-				console.warn(e.message);
-			}
-		},
-		async logout({ commit, dispatch }) {
-			try {
-				let success = await AuthService.Logout();
-				if (!success) {
-				}
-				commit("resetState");
-				router.push({ name: "login" });
-			} catch (e) {
-				console.warn(e.message);
-			}
-		},
-		//#endregion
-		get({ commit }, payload) {
-			api
-				.get("" + payload.address)
-				.then(res => {
-					commit(payload.commit, {
-						data: res.data,
-						address: payload.commitAddress
-					});
-				})
-				.catch(e => console.error(e));
-		},
-		getOne({ commit }, payload) {
-			api.get("" + payload.address + "/" + payload.data._id).then(res => {
-				commit(payload.commit, {
-					data: res.data,
-					address: payload.commitAddress
-				})
-			})
-				.catch(e => console.error(e))
-		},
-		create({ commit }, payload) {
-			api.post("" + payload.address).then(res => {
-				commit(payload.commit , {
-					data: res.data,
-					address: payload.address
-				})
-			})
-				.catch(e => console.error(e))
-		},
-		edit({ commit }, payload) {
-			api.put("" + payload.address + "/" + payload.data._id).then(res => {
-				commit(payload.commit, {
-					data: res.data,
-					address: payload.address
-				})
-			})
-				.catch(e => console.error(e))
-		},
-		delete({ commit }, payload) {
-			api.delete("" + payload.address + "/" + payload.data._id).then(res => {
-				commit(payload.commit, {
-					data: res.data,
-					address: payload.commitAddress
-				})
-			})
-		}
-	}
+    //#region -- AUTH STUFF --
+    async register({ commit, dispatch }, payload) {
+      try {
+        let res = await AuthService.Register(payload);
+        commit("setItem", {
+          address: "user",
+          data: res
+        });
+        router.push({ name: "home" });
+      } catch (e) {
+        console.warn(e.message);
+      }
+    },
+    async login({ commit, dispatch }, payload) {
+      try {
+        let res = await AuthService.Login(payload);
+        commit("setItem", {
+          address: "user",
+          data: res
+        });
+        router.push({ name: "home" });
+      } catch (e) {
+        console.warn(e.message);
+      }
+    },
+    async logout({ commit, dispatch }) {
+      try {
+        let success = await AuthService.Logout();
+        if (!success) {
+        }
+        commit("resetState");
+      } catch (e) {
+        console.warn(e.message);
+      }
+      router.push({ name: "login" });
+    },
+    //#endregion
+    get({ commit }, payload) {
+      api
+        .get("" + payload.address)
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        })
+        .catch(e => console.error(e));
+    },
+    getOne({ commit }, payload) {
+      api
+        .get("" + payload.address + "/" + payload.data._id)
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        })
+        .catch(e => console.error(e));
+    },
+    getOneByAnother({ commit }, payload) {
+      debugger;
+      api2
+        .get(
+          "" +
+            payload.address1 +
+            "/" +
+            payload.data._id +
+            "/" +
+            payload.address2
+        )
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        });
+      // for using ref's. address 1 is where the id/ref comes from, address 2 is what youre looking for, commitAddress is where it's going in the state.
+    },
+    create({ commit }, payload) {
+      api
+        .post("" + payload.address, payload.data)
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        })
+        .catch(e => console.error(e));
+    },
+    edit({ commit }, payload) {
+      api
+        .put(
+          "" + payload.address + "/" + payload.data._id || payload._id,
+          payload.data
+        )
+        .then(res => {
+          commit(payload.commit, {
+            data: res.data,
+            address: payload.commitAddress
+          });
+        })
+        .catch(e => console.error(e));
+    },
+    delete({ commit }, payload) {
+      api.delete("" + payload.address + "/" + payload.data._id).then(res => {
+        commit(payload.commit, {
+          data: res.data,
+          address: payload.commitAddress
+        });
+      });
+    }
+  }
 });
 
 // Object-forEach Polyfill - :)

@@ -36,5 +36,5 @@
 </script>
 
 <style scoped>
-	@import "../assets/styles/View_Text_Lobbies.css";
+@import "../assets/styles/View_Text_Lobbies.css";
 </style>

@@ -5,8 +5,7 @@ let ObjectId = Schema.Types.ObjectId;
 const Question = new Schema(
   {
     description: { type: String, required: true, minlength: 10 },
-    answer: { type: String },
-    authorId: { type: ObjectId, ref: "User", required: true }
+    answer: { type: String }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 );

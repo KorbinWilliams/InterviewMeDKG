@@ -21,7 +21,7 @@ export default {
     answer: "";
   },
   mounted() {
-    this.$store.dispatch("getActiveQuiz");
+    this.$store.dispatch("getOne");
   },
   methods: {},
   computed: {
@@ -33,5 +33,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

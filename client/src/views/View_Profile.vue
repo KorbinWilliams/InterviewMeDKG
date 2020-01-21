@@ -1,11 +1,11 @@
 <template>
-  <div class="container profile bg-profile">
+  <div class="container view-profile bg-profile">
     <div class="row">
       <Widget_User />
     </div>
     <div class="row">
       <div class="col-offset-4">
-        <img :src="profileSettings.userImage" alt="User Image" />
+        <img :src="$store.state.profile.userImage" alt="User Image" />
         <form>
           <label for="Set User Image"></label>
           <input type="text" v-model="profileSettings.userImage" />
@@ -14,29 +14,29 @@
     </div>
     <div class="row">
       <div class="col-6 status">
-        <p>{{ interviewerStatus }}</p>
+        <!-- <p>{{ profile.interviewerStatus }}</p> -->
         <form>
           <input type="text" v-model="profileSettings.interviewerStatus" />
         </form>
-        <p>{{ intervieweeStatus }}</p>
+        <!-- <p>{{ intervieweeStatus }}</p> -->
         <form>
           <input type="text" v-model="profileSettings.intervieweeStatus" />
         </form>
       </div>
       <div class="col-6 general-info">
-        <p>{{ name }}</p>
+        <p>{{ profile.name }}</p>
         <form>
           <input type="text" v-model="profileSettings.name" />
         </form>
-        <p>{{ email }}</p>
+        <p>{{ profile.email }}</p>
         <form>
           <input type="text" v-model="profileSettings.email" />
         </form>
-        <p>{{ jobTitle }}</p>
+        <p>{{ profile.jobTitle }}</p>
         <form>
           <input type="text" v-model="profileSettings.jobTitle" />
         </form>
-        <p>{{ jobSkills }}</p>
+        <p>{{ profile.jobSkills }}</p>
         <form>
           <input type="text" v-model="profileSettings.jobSkills" />
         </form>
@@ -69,15 +69,20 @@ export default {
       }
     };
   },
-  // mounted() {},
   computed: {
-    profiles() {
-      this.$store.state.userProfile;
+    profile() {
+      return this.$store.state.profile;
     }
   },
   methods: {
     saveProfile() {
-      this.$store.dispatch("editProfile", profileSettings);
+      this.$store.dispatch("edit", {
+        data: this.profileSettings,
+        _id: this.$store.state.profile._id,
+        address: "profiles",
+        commit: "setItem",
+        commitAdress: "profile"
+      });
     }
   },
   components: {
