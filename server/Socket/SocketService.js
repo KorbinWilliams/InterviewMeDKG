@@ -29,44 +29,61 @@ class Socket {
 	
 	
 	talk (socket, data) {
-		// console.log ();
 		try {
 			this.io.emit ('receive', data);
-			console.log ('Error: ' + e);
 		} catch (e) {
+			console.log ('There has been an error: '+e.message);
 			handlE (e);
 		}
 		// console.log ();
 		
-		let today = getDate ();
-		fs.writeFileSync ('./text_chat/' + Object.keys (socket.rooms)[0] + '~' + today + '.json', JSON.stringify ({
+		//FIXME This write multiple top-level json objects to the file, which is not allowed according to the json
+		// standard. This will need to read first, parse, then add date to that object; from there it will need to
+		// stringify the object, then write to the json file.
+		let fileData = JSON.stringify ({
 			message: data.message
-			, time: getDate (true)
-		}), function (error) {
+			,username: data.username
+			,time: getDate (true)
+		}, null, 4);
+		let today = getDate ();
+		fs.writeFileSync ('./text_chat/' + Object.keys (socket.rooms)[0] + '~' + today + '.json'
+		, fileData
+		, {flag: 'a'}
+		, function (error) {
 			handlE (error);
 		});
 	}
 	
-	//#FIXME Push update to clients to notify them of new room creation.
+	//TODO Push update to clients to notify them of new room creation.
 	createRoom (socket, data) {
-		console.log ('Creating room, roomId: ' + data.uid);
 		socket.join ('' + data.uid);
-		this.Room (data.uid).public = true;
+		let room = this.Room (data.uid);
+		room.public = true;
+		room.title = data.title;
+		room.description = data.description;
+		room.id = data.uid;
 		socket.emit ('createLobby', this.Room (data.uid));
 	}
 	
-	//#TODO Make room checking (checkConnection as below) function and add room checking in joinRoom function.
+	//TODO Make room checking (checkConnection as below) function and add room checking in joinRoom function.
 	joinRoom (socket, payload) {
-		// Used to make sure the socket is not connected to another room.
-		// checkConnection (socket) {
+		// checkRooms (socket) {
 		//
 		// }
-		socket.join ('' + payload.lobbyId);
-		socket.emit ('joinRoom', {
-			message: 'Successfully Joined',
-			room: this.Room (payload.lobbyId)
-		});
-		socket.to ('' + payload.lobbyId).emit ('user join', payload.user);
+		try {
+			socket.join ('' + payload.lobbyId);
+			socket.emit ('joinLobby', {
+				message: 'Successfully Joined',
+				lobby: this.Room (payload.lobbyId)
+			});
+			socket.to ('' + payload.lobbyId).emit ('user join', payload.user);
+		} catch (e) {
+			handlE (e);
+			socket.emit ('joinRoom', {
+				error: e,
+				message: e.message
+			})
+		}
 	}
 	
 	getRooms (socket) {
@@ -87,6 +104,11 @@ class Socket {
 		socket.leave (payload.lobbyId);
 		io.to ('' + lobbyId).emit ('user leave')
 	}
+}
+
+// Used to make sure the socket is not connected to another room.
+function checkRooms () {
+
 }
 
 //Returns date for writing to file and keeping track of timeline - if passed true it will return Day - Hour:Minute
@@ -113,12 +135,12 @@ function getDate (bool) {
 	return [year, month, day].join ('-');
 }
 
-//Generic error handler and logger - writes errors to files as JSON objects for future use.
+//Generic error handler and logger - writes errors to files as JSON objects for future use/reference.
 function handlE (error, inBool = false) {
 	let calledOnce = inBool;
-	console.log ('There has been an error: ', error);
+	console.log ('There has been an error: '+ error);
 	let date = getDate ();
-	fs.writeFileSync (`./ErrorLogs/${date}`, JSON.stringify (error), (error) => {
+	fs.writeFileSync (`./ErrorLogs/${date}.json`, JSON.stringify (error), {flag: 'a'}, (error) => {
 		console.log ('Can not write error to file: ' + error.message);
 		if (!calledOnce) {
 			handlE (error, true);

@@ -4,7 +4,7 @@
 		<div class="lobby" v-for="lobby in lobbies" :id="lobby._id">
 			<h2>{{ lobby.username }}</h2>
 			<p>{{ lobby.description }}</p>
-			<button type="button" @click="joinLobby(lobby._id)">Join</button>
+			<button type="button" @click="joinLobby(lobby.id)">Join</button>
 		</div>
 	</div>
 </template>
@@ -26,7 +26,6 @@
 		},
 		methods: {
 			joinLobby (lobbyId) {
-				console.log (lobbyId);
 				this.$store.dispatch ('join', lobbyId);
 			}
 		},
