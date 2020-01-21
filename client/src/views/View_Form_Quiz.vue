@@ -1,10 +1,21 @@
 <template>
-  <div id="quiz_form">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <Widget_User />
-        </div>
+  <div class="container quiz_form">
+    <div class="row">
+      <div class="col-12 status">
+        <h2 class="text-center">Lets Create a Quiz!</h2>
+        <form @submit.prevent="addQuestion">
+          <label for="category">Category</label>
+          <label for="description">Quiz Question</label>
+          <input
+            type="text"
+            id="description"
+            v-model="question.description"
+            required
+          />
+          <label for="answer">Question Answer</label>
+          <input type="text" id="answer" v-model="question.answer" />
+          <button type="submit">Add Question</button>
+        </form>
       </div>
     </div>
     <div class="container">
@@ -67,14 +78,11 @@ export default {
   },
   methods: {
     addQuestion() {
-      debugger;
-      this.$store.dispatch("create", this.question);
-
-      // this.quiz.questions.push(this.question);
-      // this.question = {
-      //   description: "",
-      //   answer: ""
-      // };
+      this.quiz.questions.push(this.question);
+      this.question = {
+        description: "",
+        answer: ""
+      };
     },
     submitQuiz() {
       debugger;

@@ -50,6 +50,8 @@ export default new Vuex.Store({
         user: {},
         profile: {},
         quiz: {},
+        quizzes: [],
+        quizCategories: [],
         pageData: {
           lobbies: Array,
           profileData: Array,
@@ -149,22 +151,22 @@ export default new Vuex.Store({
     },
     create({ commit }, payload) {
       api
-        .post("" + payload.address, payload.data)
+        .post("" + payload.address)
         .then(res => {
           commit(payload.commit, {
             data: res.data,
-            address: payload.commitAddress
+            address: payload.address
           });
         })
         .catch(e => console.error(e));
     },
     edit({ commit }, payload) {
       api
-        .put("" + payload.address + "/" + payload.data._id, payload.data)
+        .put("" + payload.address + "/" + payload.data._id)
         .then(res => {
           commit(payload.commit, {
             data: res.data,
-            address: payload.commitAddress
+            address: payload.address
           });
         })
         .catch(e => console.error(e));
