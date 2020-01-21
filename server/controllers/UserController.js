@@ -70,16 +70,11 @@ export default class UserController {
 
   async getProfileByUserId(req, res, next) {
     try {
-<<<<<<< HEAD
       let data = await _profileService.getProfileByUserId(
-        req.body.userId,
+        req.params.id,
         req.session.uid
       );
       return res.send(data);
-=======
-      let data = await _profileService.getProfileByUserId(req.params.id, req.session.uid)
-      return res.send(data)
->>>>>>> 8efa5bf656c732f73f477c17a8c89314fc36c8f1
     } catch (error) {
       next(error);
     }
