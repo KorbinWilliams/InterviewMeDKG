@@ -1,58 +1,61 @@
 <template>
-  <div class="container quiz_form">
+  <div class="container-fluid quiz_form">
     <div class="row">
-      <div class="col-12 status">
-        <h2 class="text-center">Lets Create a Quiz!</h2>
-        <form @submit.prevent="addQuestion">
-          <label for="category">Category</label>
-          <label for="description">Quiz Question</label>
-          <input
-            type="text"
-            id="description"
-            v-model="question.description"
-            required
-          />
-          <label for="answer">Question Answer</label>
-          <input type="text" id="answer" v-model="question.answer" />
-          <button type="submit">Add Question</button>
-        </form>
+      <div class="col-12">
+        <Widget_User />
       </div>
     </div>
-    <div class="container">
+    <div class="container-fluid center">
       <div class="row">
-        <div class="col-12 status">
-          <h2 class="text-center">Lets Create a Quiz!</h2>
-          <form @submit.prevent="addQuestion">
-            <!-- <label for="quiz_name">Quiz Name</label> -->
-            <!-- <label for="category">Category</label>
-          <input type="text" id="quiz_category" /> -->
-
-            <label for="description">Quiz Question</label>
+        <div class="col-12 status center">
+          <h2 class="text-center m-3">Lets Create a Quiz!</h2>
+        </div>
+      </div>
+      <div class="formData">
+        <form @submit.prevent="">
+          <div class="">
             <input
               type="text"
-              id="description"
-              v-model="question.description"
-              required
+              id="quizName"
+              v-model="quiz.name"
+              placeholder="Quiz Name..."
             />
-            <label for="answer">Question Answer</label>
-            <input type="text" id="answer" v-model="question.answer" />
-            <button type="submit">Add Question</button>
-          </form>
-        </div>
-        <div class="col-12">
-          <ul>
-            <li>{{ question.description }}{{ question.answer }}</li>
-          </ul>
-        </div>
-        <div class="row">
-          <div class="col">
-            <form>
-              <label for="quizName">Quiz Name</label>
-              <input type="text" id="quizName" v-model="quiz.name" />
-              <button @click="submitQuiz">Submit Quiz</button>
-            </form>
+            <input
+              type="text"
+              id="quizCategory"
+              v-model="quiz.categories"
+              placeholder="Quiz Category..."
+            />
           </div>
-        </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <td><strong>Question</strong></td>
+                <td><strong>Answer</strong></td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, index) in rows">
+                <td>
+                  <input type="text" v-model="row.description" />
+                </td>
+                <td><input type="text" v-model="row.answer" /></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <button class="button btn-primary" @click="addRow">
+            Add row</button
+          ><button
+            class="button btn-primary"
+            @click="addQuestion(), submitQuiz()"
+          >
+            Submit Quiz
+          </button>
+          <!-- <label for="quiz_name">Quiz Name</label> -->
+          <!-- <label for="category">Category</label>
+          <input type="text" id="quiz_category" /> -->
+        </form>
       </div>
     </div>
   </div>
@@ -65,6 +68,7 @@ export default {
   name: "View_Form_Quiz",
   data() {
     return {
+      questions: 0,
       quiz: {
         name: "",
         categories: [],
@@ -73,23 +77,40 @@ export default {
       question: {
         description: "",
         answer: ""
-      }
+      },
+      rows: []
     };
   },
   methods: {
-    addQuestion() {
-      this.quiz.questions.push(this.question);
-      this.question = {
+    addRow() {
+      var elem = document.createElement("tr");
+      this.rows.push({
         description: "",
         answer: ""
-      };
+      });
+    },
+    addQuestion() {
+      // debugger;
+      this.rows.forEach(item => {
+        this.quiz.questions.push(item);
+        console.log(this.quiz.questions);
+      });
+
+      // this.question = {
+      //   description: "",
+      //   answer: ""
     },
     submitQuiz() {
-      debugger;
+      // debugger;
       this.$store.dispatch("create", {
         data: this.quiz,
-        address: "quizes"
+        address: "quizes",
+        commit: "setItem",
+        commitAddress: "quizes"
       });
+      this.rows = "";
+      this.quiz = "";
+
       console.log(this.quiz);
     }
   },
@@ -99,4 +120,13 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.formData {
+  text-align-last: center;
+  text-align: center;
+}
+.quiz_form {
+  background-color: rgb(181, 196, 223);
+  min-height: 100vh;
+}
+</style>
