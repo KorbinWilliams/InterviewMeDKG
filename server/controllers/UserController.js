@@ -2,7 +2,7 @@ import express from "express";
 import { Authorize } from "../middleware/authorize";
 import _userService from "../services/UserService";
 import _profileService from "../services/ProfileService";
-import socketService from '../Socket/SocketService'
+import socketService from "../Socket/SocketService";
 
 //PUBLIC
 export default class UserController {
@@ -15,7 +15,7 @@ export default class UserController {
       .get("/authenticate", this.authenticate)
       .delete("/logout", this.logout)
       .get("/:id/profiles", this.getProfileByUserId)
-      .use(this.defaultRoute)
+      .use(this.defaultRoute);
   }
 
   defaultRoute(req, res, next) {
@@ -70,10 +70,13 @@ export default class UserController {
 
   async getProfileByUserId(req, res, next) {
     try {
-      let data = await _profileService.getProfileByUserId(req.body.userId, req.session.uid)
-      return res.send(data)
+      let data = await _profileService.getProfileByUserId(
+        req.body.userId,
+        req.session.uid
+      );
+      return res.send(data);
     } catch (error) {
-      next(error)
+      next(error);
     }
   }
 }
