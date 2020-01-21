@@ -38,8 +38,9 @@ export default {
       this.$store.dispatch("login", this.creds).then(res => {
         this.$store.dispatch("getOneByAnother", {
           data: { _id: this.$store.state.user._id },
+          commit: "setItem",
           commitAddress: "profile",
-          address1: "users",
+          address1: "account",
           address2: "profiles"
         });
       });

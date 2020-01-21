@@ -18,6 +18,13 @@ let api = Axios.create({
 	withCredentials: true
 });
 
+let api2 = Axios.create({
+	baseURL: base,
+	timeout: 3000,
+	withCredentials: true
+})
+
+
 export default new Vuex.Store({
 	state: {
 		user: {},
@@ -97,19 +104,25 @@ export default new Vuex.Store({
      * , commitAddress: '-the place to commit to-'
      */
 		//#region -- AUTH STUFF --
-		async register({ commit, dispatch }, creds) {
+		async register({ commit, dispatch }, payload) {
 			try {
-				let user = await AuthService.Register(creds);
-				commit("setUser", user);
+				let res = await AuthService.Register(payload);
+				commit("setItem", {
+					address: "user",
+					data: res
+				});
 				router.push({ name: "home" });
 			} catch (e) {
 				console.warn(e.message);
 			}
 		},
-		async login({ commit, dispatch }, creds) {
+		async login({ commit, dispatch }, payload) {
 			try {
-				let user = await AuthService.Login(creds);
-				commit("setUser", user);
+				let res = await AuthService.Login(payload);
+				commit("setItem", {
+					address: "user",
+					data: res
+				});
 				router.push({ name: "home" });
 			} catch (e) {
 				console.warn(e.message);
@@ -120,12 +133,11 @@ export default new Vuex.Store({
 				let success = await AuthService.Logout();
 				if (!success) {
 				}
-				commit("resetState").then(res => {
-					router.push({ name: "login" });
-				})
+				commit("resetState")
 			} catch (e) {
 				console.warn(e.message);
 			}
+			router.push({ name: "login" });
 		},
 		//#endregion
 		get({ commit }, payload) {
@@ -151,7 +163,7 @@ export default new Vuex.Store({
 				.catch(e => console.error(e));
 		},
 		getOneByAnother({ commit }, payload) {
-			api.get("" + payload.address1 + "/" + payload.data._id + "/" + payload.address2).then(res => {
+			api2.get("" + payload.address1 + "/" + payload.data._id + "/" + payload.address2).then(res => {
 				commit(payload.commit, {
 					data: res.data,
 					address: payload.commitAddress
@@ -189,8 +201,7 @@ export default new Vuex.Store({
 				});
 			});
 		},
-
-	}
+	},
 });
 
 // Object-forEach Polyfill - :)
