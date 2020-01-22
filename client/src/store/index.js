@@ -165,14 +165,8 @@ export default new Vuex.Store({
 		},
 		getOneByAnother({ commit }, payload) {
 			api2
-				.get(
-					"" +
-					payload.address1 +
-					"/" +
-					payload.data._id +
-					"/" +
-					payload.address2
-				)
+				.get("" + payload.address1 + "/" + payload.data._id +
+					"/" + payload.address2)
 				.then(res => {
 					commit(payload.commit, {
 						data: res.data,

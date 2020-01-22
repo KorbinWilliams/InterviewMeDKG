@@ -111,8 +111,6 @@ export default {
       // TODO commit data returned from edit instead of another get
     }
   },
-  // function timeFunction() {
-  //  setTimeout(function(){ alert("After 5 seconds!"); }, 5000);
   components: {
     Widget_User
   }
@@ -121,7 +119,7 @@ export default {
 
 <style>
 .bg-profile {
-  background-color: mediumseagreen;
+  background-color: rgb(82, 82, 158);
   background-size: cover;
 }
 
@@ -131,7 +129,7 @@ export default {
 }
 
 .box {
-  border: 1rem solid rgb(88, 67, 67);
+  border: 1rem solid rgb(24, 31, 53);
 }
 </style>
 
