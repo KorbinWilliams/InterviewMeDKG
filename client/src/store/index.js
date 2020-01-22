@@ -29,6 +29,7 @@ export default new Vuex.Store({
     user: {},
     profile: {},
     quiz: {},
+    quizes: [],
     question: [],
     pageData: {
       lobbies: Array,
@@ -55,10 +56,11 @@ export default new Vuex.Store({
       state = {
         user: {},
         profile: {},
-        quiz: {},
-        quizzes: [],
+
         quizCategories: [],
         pageData: {
+          quiz: {},
+          quizes: [],
           lobbies: Array,
           profileData: Array,
           chat: [],
@@ -162,7 +164,6 @@ export default new Vuex.Store({
         .catch(e => console.error(e));
     },
     getOneByAnother({ commit }, payload) {
-      debugger;
       api2
         .get(
           "" +

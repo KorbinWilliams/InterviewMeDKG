@@ -52,9 +52,6 @@
           >
             Submit Quiz
           </button>
-          <!-- <label for="quiz_name">Quiz Name</label> -->
-          <!-- <label for="category">Category</label>
-          <input type="text" id="quiz_category" /> -->
         </form>
       </div>
     </div>
@@ -90,26 +87,19 @@ export default {
       });
     },
     addQuestion() {
-      // debugger;
       this.rows.forEach(item => {
         this.quiz.questions.push(item);
         console.log(this.quiz.questions);
       });
-
-      // this.question = {
-      //   description: "",
-      //   answer: ""
     },
     submitQuiz() {
-      // debugger;
       this.$store.dispatch("create", {
         data: this.quiz,
         address: "quizes",
         commit: "setItem",
         commitAddress: "quizes"
       });
-      this.rows = "";
-      this.quiz = "";
+      this.$router.push("/");
     }
   },
   components: {

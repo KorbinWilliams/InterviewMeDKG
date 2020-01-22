@@ -6,7 +6,9 @@ const _repository = mongoose.model("Quiz", Quiz);
 
 class QuizService {
   async getAll() {
-    let data = await _repository.find();
+    let data = await _repository.find({});
+    console.log(data);
+
     return data;
   }
 
