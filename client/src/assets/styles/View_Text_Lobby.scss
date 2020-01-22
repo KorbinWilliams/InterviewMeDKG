@@ -1,0 +1,30 @@
+#chat-input-form {
+	height: 20vh;
+	position: absolute;
+	bottom: 0;
+}
+
+#chat-box {
+	height: 80vh;
+	overflow-y: scroll;
+}
+
+.chat-item {
+	display: flex;
+	margin: 1rem;
+	position: relative;
+	background: #397c82;
+	border-radius: .4em;
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border-top-color: #00aabb;
+		border-bottom: 0;
+		border-left: 0;
+
+	}
+}

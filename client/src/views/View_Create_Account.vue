@@ -8,9 +8,9 @@
         <label for="input2">Email</label>
         <input id="input2" type="text" v-model="creds.email" required />
         <label for="input3">Password</label>
-        <input id="input3" type="text" v-model="creds.password" required />
+        <input id="input3" type="password" v-model="creds.password" required />
         <label for="input4">Repeat Password</label>
-        <input id="input4" type="text" v-model="creds.repeatPass" required />
+        <input id="input4" type="password" v-model="creds.repeatPass" required />
         <button type="submit">Login</button>
       </form>
       <p>

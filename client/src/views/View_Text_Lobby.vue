@@ -1,13 +1,21 @@
 <template>
 	<section id="chat">
 		<Widget_User/>
-		<div id="chat-box">
-			<p v-for="item in chat">{{ item.message }}</p>
-		</div>
-		<label for="text-chat-input"/>
-		<input type="text" id="text-chat-input" v-model="userInput"/>
-		<button type="button" @click="talk">Send</button>
-		<button type="button" @click="getLobbies">Join</button>
+		<md-list id="chat-box" style="padding-top:25px; ">
+			<div v-for="item in chat" class="chat-item" v-bind:class="{'received': item.received}">
+				<h3 v-if="item.received" class="md-display-1">{{item.username}}:</h3>
+				<p v-if="item.received">{{item.message}}</p>
+				<p v-if="!item.received">{{item.message}}</p>
+				<h3 v-if="!item.received" class="md-display-1">:{{item.username}}</h3>
+			</div>
+		</md-list>
+		<md-bottom-bar id="chat-input-form" class="md-layout md-position-bottom">
+			<md-field style="display: flex; flex-direction: row;">
+				<label for="text-chat-input">Message</label>
+				<md-textarea type="text" id="text-chat-input" v-model="userInput"/>
+			</md-field>
+			<md-button class="md-button-spaced md-raised" type="button" @click="talk">Send</md-button>
+		</md-bottom-bar>
 	</section>
 </template>
 
@@ -37,12 +45,22 @@
 				return this.$store.state.pageData.chat;
 			}
 		},
+		updated () {
+			document.getElementById ('chat-box').scrollTop = document.getElementById ('chat-box').scrollHeight;
+		},
 		methods: {
 			talk () {
 				let message = this.userInput;
 				//TODO Send notification that the user needs to actually type something.
-				if (!message) return;
+				if (!message) {
+					this.$notify ({
+						group: 'error'
+						, title: 'Please provide input.'
+					})
+				}
+				;
 				this.$store.dispatch ("send", message);
+				this.userInput = '';
 			},
 			getLobbies () {
 				this.$store.dispatch ("getLobbies");
@@ -52,4 +70,5 @@
 </script>
 
 <style scoped>
+	@import "../assets/styles/View_Text_Lobby.css";
 </style>

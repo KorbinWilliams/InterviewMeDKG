@@ -6,7 +6,7 @@
         <label for="input1">Email</label>
         <input id="input1" type="text" v-model="creds.email" required />
         <label for="input2">Password</label>
-        <input id="input2" type="text" v-model="creds.password" required />
+        <input id="input2" type="password" v-model="creds.password" required />
         <button type="submit">Login</button>
       </form>
       <p>

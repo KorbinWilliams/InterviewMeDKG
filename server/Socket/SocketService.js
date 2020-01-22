@@ -1,5 +1,10 @@
 import fs from 'fs';
 
+//TODO Return filtered list of rooms based on search term sent by client, search in the title, categories, and
+// description, in that order. This will require searching through ALL rooms on each request from client. Dont know
+// if there is a better way than the standard .includes.
+//NOTE This will need to be case sensitive and should be accomplish with a simple Array.includes and String.includes.
+
 class Socket {
 	setIO (io) {
 		this.io = io;
@@ -32,7 +37,7 @@ class Socket {
 		try {
 			this.io.emit ('receive', data);
 		} catch (e) {
-			console.log ('There has been an error: '+e.message);
+			console.log ('There has been an error: ' + e.message);
 			handlE (e);
 		}
 		// console.log ();
@@ -42,8 +47,8 @@ class Socket {
 		// stringify the object, then write to the json file.
 		let fileData = JSON.stringify ({
 			message: data.message
-			,username: data.username
-			,time: getDate (true)
+			, username: data.username
+			, time: getDate (true)
 		}, null, 4);
 		let today = getDate ();
 		fs.writeFileSync ('./text_chat/' + Object.keys (socket.rooms)[0] + '~' + today + '.json'
@@ -55,7 +60,9 @@ class Socket {
 	}
 	
 	//TODO Push update to clients to notify them of new room creation.
+	//TODO Save categories add to room in array and save in local memory and db.
 	createRoom (socket, data) {
+		// checkRooms (socket);
 		socket.join ('' + data.uid);
 		let room = this.Room (data.uid);
 		room.public = true;
@@ -67,9 +74,6 @@ class Socket {
 	
 	//TODO Make room checking (checkConnection as below) function and add room checking in joinRoom function.
 	joinRoom (socket, payload) {
-		// checkRooms (socket) {
-		//
-		// }
 		try {
 			socket.join ('' + payload.lobbyId);
 			socket.emit ('joinLobby', {
@@ -77,6 +81,9 @@ class Socket {
 				lobby: this.Room (payload.lobbyId)
 			});
 			socket.to ('' + payload.lobbyId).emit ('user join', payload.user);
+			if (Object.keys (this.Room (payload.lobbyId).sockets).length >= 2) {
+				this.Room (payload.lobbyId).public = false;
+			}
 		} catch (e) {
 			handlE (e);
 			socket.emit ('joinRoom', {
@@ -107,9 +114,20 @@ class Socket {
 }
 
 // Used to make sure the socket is not connected to another room.
-function checkRooms () {
-
-}
+// function checkRooms (SOCKET) {
+// 	let roomId = Object.keys(SOCKET.rooms)[0];
+// 	console.log (roomId, socket.Room(roomId).public, socket.Room(roomId));
+// 	if(socket.Room(roomId).public === true) {
+// 		SOCKET.emit ('joinRoom', {
+// 			error: {
+// 				message: 'Cannot join a lobby while still in a lobby. If you think this is an error, try reloading. If you are still experiencing problems please report them.'
+// 				,status: 403
+// 			}
+// 		});
+// 		return;
+// 	}
+// 	console.log (roomId, socket.Room(roomId).public, socket.Room(roomId));
+// }
 
 //Returns date for writing to file and keeping track of timeline - if passed true it will return Day - Hour:Minute
 function getDate (bool) {
@@ -138,7 +156,7 @@ function getDate (bool) {
 //Generic error handler and logger - writes errors to files as JSON objects for future use/reference.
 function handlE (error, inBool = false) {
 	let calledOnce = inBool;
-	console.log ('There has been an error: '+ error);
+	console.log ('There has been an error: ' + error);
 	let date = getDate ();
 	fs.writeFileSync (`./ErrorLogs/${date}.json`, JSON.stringify (error), {flag: 'a'}, (error) => {
 		console.log ('Can not write error to file: ' + error.message);

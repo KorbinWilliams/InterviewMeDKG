@@ -1,6 +1,7 @@
 <template>
 	<div class="view-categories">
 		<Create_Lobby_Modal/>
+		
 		<div class="lobby" v-for="lobby in lobbies" :id="lobby._id">
 			<h2>{{ lobby.username }}</h2>
 			<p>{{ lobby.description }}</p>

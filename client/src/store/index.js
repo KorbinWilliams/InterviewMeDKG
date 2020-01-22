@@ -18,6 +18,12 @@ let api = Axios.create({
 	withCredentials: true
 });
 
+let api2 = Axios.create({
+	baseURL: base + "",
+	timeout: 3000,
+	withCredentials: true
+});
+
 
 export default new Vuex.Store({
 	state: {
