@@ -17,7 +17,6 @@ let api = Axios.create({
   timeout: 3000,
   withCredentials: true
 });
-
 let api2 = Axios.create({
   baseURL: base,
   timeout: 3000,
@@ -56,11 +55,11 @@ export default new Vuex.Store({
       state = {
         user: {},
         profile: {},
-
+        quiz: {},
+        lobby: {},
+        quizzes: [],
         quizCategories: [],
         pageData: {
-          quiz: {},
-          quizes: [],
           lobbies: Array,
           profileData: Array,
           chat: [],
@@ -194,10 +193,7 @@ export default new Vuex.Store({
     },
     edit({ commit }, payload) {
       api
-        .put(
-          "" + payload.address + "/" + payload.data._id || payload._id,
-          payload.data
-        )
+        .put("" + payload.address + "/" + payload._id, payload.data)
         .then(res => {
           commit(payload.commit, {
             data: res.data,

@@ -19,8 +19,8 @@ server.use(express.static(__dirname + "/../client/dist"));
 DbContext.connect();
 Socket.setIO(io);
 
-var whitelist = ["http://localhost:8080"];
-var corsOptions = {
+const whitelist = ["http://localhost:8080"];
+const corsOptions = {
   origin: function(origin, callback) {
     var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
     callback(null, originIsWhitelisted);
@@ -61,6 +61,6 @@ server.use("*", (req, res, next) => {
   });
 });
 
-socketServer.listen(port, () => {
+const listenServer = socketServer.listen(port, () => {
   console.log("server running on port", port);
 });

@@ -28,14 +28,14 @@ class ProfileService {
     return data;
   }
 
-  async edit(id, userId, update) {
+  async edit(id, update, userId) {
     let data = await _repository.findOneAndUpdate(
       { _id: id, authorId: userId },
       update,
       { new: true }
     );
     if (!data) {
-      throw new ApiError("Invalid ID or you do not own this quiz", 400);
+      throw new ApiError("Invalid ID or you do not own this profile", 400);
     }
     return data;
   }

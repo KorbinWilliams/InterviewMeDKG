@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="col-4">
-          <router-link to="/text_categories">
+          <router-link to="/text_lobbies">
             <div class="card">
               <div class="card-block">
                 <h5>Text Interview</h5>
