@@ -23,7 +23,8 @@ export default class QuizController {
   async getAll(req, res, next) {
     try {
       let data = await _quizService.getAll();
-      return data;
+      console.log(data);
+      return res.send(data);
     } catch (error) {
       next(error);
     }

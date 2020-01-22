@@ -22,13 +22,9 @@
 </template>
 
 <script>
-// import VueNotify from 'vue-notifications';
-
 export default {
   name: "View_Create_Account",
-  components: {
-    // VueNotify
-  },
+  components: {},
   data() {
     return {
       creds: {

@@ -21,15 +21,14 @@ let api2 = Axios.create({
 	baseURL: base,
 	timeout: 3000,
 	withCredentials: true
-})
-
+});
 
 export default new Vuex.Store({
 	state: {
 		user: {},
 		profile: {},
-		lobby: {},
 		quiz: {},
+		quizes: [],
 		question: [],
 		pageData: {
 			lobbies: Array,
@@ -92,7 +91,7 @@ export default new Vuex.Store({
 			}
 		},
 		removeItem(state, payload) {
-			state[payload.address].filter(item => item._id = payload.data._id)
+			state[payload.address].filter(item => (item._id = payload.data._id));
 		}
 	},
 	actions: {

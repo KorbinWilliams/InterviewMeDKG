@@ -36,7 +36,7 @@
           </router-link>
         </div>
         <div class="col-4">
-          <router-link to="/quiz_categories">
+          <router-link to="/quizzes">
             <div class="card">
               <div class="card-block">
                 <h5>Quiz</h5>
@@ -55,14 +55,14 @@
 </template>
 
 <script>
-	import Widget_User from "../components/Widget_User";
-	
-	export default {
-		name: "View_Home"
-		, components: {
-			Widget_User
-		}
-	}
+import Widget_User from "../components/Widget_User";
+
+export default {
+  name: "View_Home",
+  components: {
+    Widget_User
+  }
+};
 </script>
 
 <style scoped>
