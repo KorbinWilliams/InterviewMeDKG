@@ -14,9 +14,10 @@
       <!-- <div class="card-deck"> -->
       <div
         v-for="quiz in quizes"
+        @click="setActiveQuiz(this.quiz)"
         :key="quiz.id"
         :style="{ backgroundColor: randomColor() }"
-        class="card col-3 m-3"
+        class="card col-sm-9 col-md-6 col-lg-3 m-3"
       >
         <div class="card-body">
           <h5>{{ quiz.name }}</h5>
@@ -32,31 +33,22 @@ import Widget_User from "../components/Widget_User";
 export default {
   name: "Quizzes",
   props: [],
-  data() {
-    return {
-      quizInfo: {
-        name: "",
-        categories: [],
-        questions: []
-      }
-    };
-  },
+
   methods: {
+    setActiveQuiz() {
+      this.$store.commit;
+    },
     randomColor() {
       const colorsList = [
-        "grey",
-        "deep-orange",
-        "brown",
-        "blue-grey",
-        "orange",
-        "green",
-        "cyan",
-        "teal",
-        "blue",
-        "indigo",
-        "pink",
-        "red",
-        "purple"
+        "#9e9e9e",
+        "",
+        "#107dac",
+        "#005073",
+        "#00785d",
+        "	#00ba9a",
+        "#0004ff",
+        "#006db0",
+        "	#00babf"
       ];
       const rand = Math.floor(Math.random() * colorsList.length);
       return colorsList[rand];
@@ -83,7 +75,7 @@ export default {
 
 <style scoped>
 .quizzes {
-  background: linear-gradient(-45deg, #6dbcdd, #67a4c1, #405f61, #172c31);
+  background: linear-gradient(-45deg, #29d563, #1bc587, #607d8d, #00babd);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
 }
