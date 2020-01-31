@@ -16,7 +16,7 @@
               <img
                 src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                 class="card-img"
-                alt=""
+                alt
               />
             </div>
           </div>
@@ -29,7 +29,7 @@
                 <img
                   src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                   class="card-img"
-                  alt=""
+                  alt
                 />
               </div>
             </div>
@@ -37,13 +37,13 @@
         </div>
         <div class="col-4">
           <router-link to="/quizzes">
-            <div class="card">
+            <div class="card btn-3">
               <div class="card-block">
                 <h5>Quiz</h5>
                 <img
                   src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                   class="card-img"
-                  alt=""
+                  alt
                 />
               </div>
             </div>
@@ -81,5 +81,13 @@ export default {
 .card-block {
   padding: 10px 10px 10px 10px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.card {
+  transition: transform 0.2s;
+}
+.card:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
 }
 </style>
