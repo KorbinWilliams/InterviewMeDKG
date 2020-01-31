@@ -1,5 +1,5 @@
 <template>
-  <div class="quizzes">
+  <div class="quizzes container-fluid">
     <div class="row">
       <div class="col">
         <Widget_User />
@@ -87,6 +87,7 @@ export default {
   background: linear-gradient(-45deg, #29d563, #1bc587, #607d8d, #00babd);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
+  min-height: 100vh;
 }
 
 @keyframes gradient {
@@ -110,8 +111,8 @@ export default {
   transition: transform 0.2s;
 }
 .card:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 </style>
