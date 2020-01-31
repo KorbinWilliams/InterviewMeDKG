@@ -16,7 +16,7 @@
               <img
                 src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
                 class="card-img"
-                alt=""
+                alt
               />
             </div>
           </div>
@@ -29,7 +29,7 @@
                 <img
                   src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                   class="card-img"
-                  alt=""
+                  alt
                 />
               </div>
             </div>
@@ -43,7 +43,7 @@
                 <img
                   src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
                   class="card-img"
-                  alt=""
+                  alt
                 />
               </div>
             </div>

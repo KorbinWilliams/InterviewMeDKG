@@ -20,10 +20,7 @@
         >
           <div class="card-body">
             <h5>{{ quiz.name }}</h5>
-            <p v-for="category in quiz.categories">
-              {{ category }}
-            </p>
-
+            <p v-for="category in quiz.categories">{{ category }}</p>
             <p></p>
           </div>
         </div>
