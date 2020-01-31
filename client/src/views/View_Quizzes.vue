@@ -25,7 +25,7 @@
         </div>
       </div>
     </div>
-    <Quiz />
+    <Quiz :quizData="activeQuiz" />
   </div>
 </template>
 
@@ -67,6 +67,9 @@ export default {
   computed: {
     quizes() {
       return this.$store.state.quizes;
+    },
+    activeQuiz() {
+      return this.$store.state.quiz;
     }
   },
   mounted() {
