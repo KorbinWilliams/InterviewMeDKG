@@ -59,6 +59,7 @@ export default new Router({
       name: "quizzes",
       component: View_Quizzes
     },
+
     {
       path: "*",
       redirect: "/"

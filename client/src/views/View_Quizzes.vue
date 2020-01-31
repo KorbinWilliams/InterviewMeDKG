@@ -10,19 +10,17 @@
         <h3 class="text-center">Quizzes</h3>
       </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-3">
-      <div class="card-deck">
-        <div
-          v-for="quiz in quizes"
-          :key="quiz.id"
-          :style="{ backgroundColor: randomColor() }"
-          class="card"
-        >
-          <div class="card-body">
-            <h5>{{ quiz.name }}</h5>
-            <p v-for="category in quiz.categories">{{ category }}</p>
-            <p></p>
-          </div>
+    <div class="row" id="quizCards">
+      <!-- <div class="card-deck"> -->
+      <div
+        v-for="quiz in quizes"
+        :key="quiz.id"
+        :style="{ backgroundColor: randomColor() }"
+        class="card col-3 m-3"
+      >
+        <div class="card-body">
+          <h5>{{ quiz.name }}</h5>
+          <p v-for="category in quiz.categories">{{ category }}</p>
         </div>
       </div>
     </div>
@@ -83,9 +81,36 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .quizzes {
-  background-color: aquamarine;
-  min-height: 100vh;
+  background: linear-gradient(-45deg, #6dbcdd, #67a4c1, #405f61, #172c31);
+  background-size: 400% 400%;
+  animation: gradient 10s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+#quizCards {
+  justify-content: center;
+}
+.card {
+  padding: 10px 10px 10px 10px;
+  box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  transition: transform 0.2s;
+}
+.card:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
 }
 </style>

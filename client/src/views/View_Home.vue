@@ -37,7 +37,7 @@
         </div>
         <div class="col-4">
           <router-link to="/quizzes">
-            <div class="card">
+            <div class="card btn-3">
               <div class="card-block">
                 <h5>Quiz</h5>
                 <img
@@ -81,5 +81,13 @@ export default {
 .card-block {
   padding: 10px 10px 10px 10px;
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+.card {
+  transition: transform 0.2s;
+}
+.card:hover {
+  -ms-transform: scale(1.1); /* IE 9 */
+  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  transform: scale(1.1);
 }
 </style>
