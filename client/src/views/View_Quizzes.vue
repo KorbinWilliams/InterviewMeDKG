@@ -14,6 +14,7 @@
       <!-- <div class="card-deck"> -->
       <div
         v-for="quiz in quizes"
+        @click="setActiveQuiz(quiz)"
         :key="quiz.id"
         :style="{ backgroundColor: randomColor() }"
         class="card col-3 m-3"
@@ -24,23 +25,16 @@
         </div>
       </div>
     </div>
+    <Quiz />
   </div>
 </template>
 
 <script>
 import Widget_User from "../components/Widget_User";
+import Quiz from "../components/Quiz";
+
 export default {
   name: "Quizzes",
-  props: [],
-  data() {
-    return {
-      quizInfo: {
-        name: "",
-        categories: [],
-        questions: []
-      }
-    };
-  },
   methods: {
     randomColor() {
       const colorsList = [
@@ -60,6 +54,13 @@ export default {
       ];
       const rand = Math.floor(Math.random() * colorsList.length);
       return colorsList[rand];
+    },
+    setActiveQuiz(quiz) {
+      this.$store.dispatch("setActive", {
+        commit: "setItem",
+        data: quiz,
+        commitAddress: "quiz"
+      });
     }
   },
 
@@ -76,7 +77,8 @@ export default {
     });
   },
   components: {
-    Widget_User
+    Widget_User,
+    Quiz
   }
 };
 </script>
