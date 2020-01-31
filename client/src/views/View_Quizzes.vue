@@ -1,5 +1,5 @@
 <template>
-  <div class="quizzes">
+  <div class="quizzes container-fluid">
     <div class="row">
       <div class="col">
         <Widget_User />
@@ -17,7 +17,7 @@
         @click="setActiveQuiz(quiz)"
         :key="quiz.id"
         :style="{ backgroundColor: randomColor() }"
-        class="card col-3 m-3"
+        class="card col-sm-9 col-md-6 col-lg-3 m-3"
       >
         <div class="card-body">
           <h5>{{ quiz.name }}</h5>
@@ -36,21 +36,20 @@ import Quiz from "../components/Quiz";
 export default {
   name: "Quizzes",
   methods: {
+    setActiveQuiz() {
+      this.$store.commit;
+    },
     randomColor() {
       const colorsList = [
-        "grey",
-        "deep-orange",
-        "brown",
-        "blue-grey",
-        "orange",
-        "green",
-        "cyan",
-        "teal",
-        "blue",
-        "indigo",
-        "pink",
-        "red",
-        "purple"
+        "#9e9e9e",
+        "",
+        "#107dac",
+        "#005073",
+        "#00785d",
+        "	#00ba9a",
+        "#0004ff",
+        "#006db0",
+        "	#00babf"
       ];
       const rand = Math.floor(Math.random() * colorsList.length);
       return colorsList[rand];
@@ -88,9 +87,10 @@ export default {
 
 <style scoped>
 .quizzes {
-  background: linear-gradient(-45deg, #6dbcdd, #67a4c1, #405f61, #172c31);
+  background: linear-gradient(-45deg, #29d563, #1bc587, #607d8d, #00babd);
   background-size: 400% 400%;
   animation: gradient 10s ease infinite;
+  min-height: 100vh;
 }
 
 @keyframes gradient {
@@ -114,8 +114,8 @@ export default {
   transition: transform 0.2s;
 }
 .card:hover {
-  -ms-transform: scale(1.1); /* IE 9 */
-  -webkit-transform: scale(1.1); /* Safari 3-8 */
+  -ms-transform: scale(1.1);
+  -webkit-transform: scale(1.1);
   transform: scale(1.1);
 }
 </style>

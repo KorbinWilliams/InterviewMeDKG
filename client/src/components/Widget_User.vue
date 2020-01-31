@@ -6,12 +6,10 @@
 
     <md-menu-content class="widget-content">
       <div id="info">
-        <h3 id="widget-username">{{ user.name }}</h3>
+        <h4 id="widget-username">{{ user.name }}</h4>
       </div>
       <md-menu-item>
-        <router-link to="settings_privacy" tag="a"
-          >Privacy Settings</router-link
-        >
+        <router-link to="settings_privacy" tag="a">Privacy Settings</router-link>
       </md-menu-item>
       <md-menu-item>
         <router-link to="profile" tag="a">Profile</router-link>
@@ -47,4 +45,23 @@ export default {
 </script>
 <style scoped>
 @import "../assets/styles/Widget_User.scss";
+
+.md-icon:hover {
+  animation-name: rotate;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+md-menu-content {
+  overflow: initial !important;
+}
 </style>
