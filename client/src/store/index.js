@@ -206,6 +206,12 @@ export default new Vuex.Store({
 					address: payload.commitAddress
 				});
 			});
+		},
+		setActive({ commit }, payload) {
+			commit(payload.commit, {
+				data: payload.data,
+				address: payload.commitAddress
+			})
 		}
 	}
 });
