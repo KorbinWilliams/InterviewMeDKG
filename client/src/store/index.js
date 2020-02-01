@@ -17,15 +17,12 @@ let api = Axios.create({
 	timeout: 3000,
 	withCredentials: true
 });
-
 let api2 = Axios.create({
-	baseURL: base + "",
+	baseURL: base,
 	timeout: 3000,
 	withCredentials: true
 });
 
-
-// noinspection JSCheckFunctionSignatures
 export default new Vuex.Store({
 	state: {
 		user: {},
@@ -166,7 +163,6 @@ export default new Vuex.Store({
         .catch(e => console.error(e));
     },
     getOneByAnother({ commit }, payload) {
-      debugger;
       api2
         .get(
           "" +

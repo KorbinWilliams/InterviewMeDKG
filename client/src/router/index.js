@@ -14,6 +14,7 @@ import View_Text_Lobby from "../views/View_Text_Lobby";
 import View_Text_Lobbies from "../views/View_Text_Lobbies";
 // @ts-ignore
 import View_Form_Quiz from "../views/View_Form_Quiz";
+import View_Quizzes from "../views/View_Quizzes";
 Vue.use(Router);
 
 export default new Router({
@@ -53,6 +54,12 @@ export default new Router({
       name: "quiz_form",
       component: View_Form_Quiz
     },
+    {
+      path: "/quizzes",
+      name: "quizzes",
+      component: View_Quizzes
+    },
+
     {
       path: "*",
       redirect: "/"

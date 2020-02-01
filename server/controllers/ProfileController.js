@@ -47,7 +47,7 @@ export default class ProfileController {
 
   async edit(req, res, next) {
     try {
-      let data = await _profileService.edit(req.body.id, req.session.uid, req.body)
+      let data = await _profileService.edit(req.params.id, req.body, req.session.uid)
       return res.send(data)
     } catch (error) { next(error) }
   }
