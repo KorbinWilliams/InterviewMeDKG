@@ -6,7 +6,7 @@
         <label for="input1">Email</label>
         <input id="input1" type="text" v-model="creds.email" required />
         <label for="input2">Password</label>
-        <input id="input2" type="text" v-model="creds.password" required />
+        <input id="input2" type="password" v-model="creds.password" required />
         <button type="submit">Login</button>
       </form>
       <p>
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+	//! Fixme - Add notification to let the user know if they put in bad pass/email.
 export default {
   name: "login",
   data() {
@@ -49,7 +50,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../assets/styles/View_Login.css";
+
+#backboard {
+  background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+  background-size: cover;
+}
 </style>
 

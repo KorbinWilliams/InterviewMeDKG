@@ -1,7 +1,7 @@
 <template>
   <md-menu id="widget-user" md-align-trigger>
     <md-button md-menu-trigger id="widget-trigger">
-      <img src="../assets/media/settings.svg" alt="Settings" class="md-icon" />
+      <img src="../assets/media/settings.svg" alt="Settings" class="md-icon" id="widget-user-icon"/>
     </md-button>
 
     <md-menu-content class="widget-content">
@@ -60,8 +60,5 @@ export default {
   to {
     transform: rotate(360deg);
   }
-}
-md-menu-content {
-  overflow: initial !important;
 }
 </style>

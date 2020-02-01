@@ -1,6 +1,8 @@
 import io from 'socket.io-client';
 import router from '../router/index'
 
+//TODO Add router gaurd at leave from text_lobby view to prevent the user from leaving without clicking a butto, @click should notify the server.
+
 let socket = {};
 
 export default {
@@ -8,21 +10,29 @@ export default {
 		initializeSocket ({commit, dispatch, rootState}) {
 			socket = io ('//localhost:3000');
 			socket.on ('CONNECTED', data => {
-				console.log ('Connected to the server socket', data);
-				socket.on ('receive', payload => this.dispatch ('receive', (payload)));
+				console.log ('Connected to the server socket');
+				commit ('setItem', {address: 'lobby', data});
+				socket.on ('receive', payload => {
+					if (payload.uid !== rootState.user._id) {
+						payload.received = true;
+					}
+					this.dispatch ('receive', (payload))
+				});
 				socket.on ('getLobbies', payload => commit ('setPageData', {data: payload, address: 'lobbies'}));
 				socket.on ('createLobby', payload => {
-					commit ('setItem', {data: payload, address: 'lobby'})
+					commit ('setItem', {data: payload, address: 'lobby'});
+					router.push('text_lobby');
 				});
 				socket.on ('joinLobby', payload => {
-					console.log (payload)
-					commit ('setItem', {address: 'lobby', data: payload.lobby})
-					router.push('text_lobby')
-				})
-				//TODO notify all others in lobby of user that joined.
+					commit ('setItem', {address: 'lobby', data: payload.lobby});
+					router.push ('text_lobby')
+				});
 				socket.on ('user join', payload => commit ('setOne', {data: payload.lobby}));
 				//TODO reset lobby to empty object and push back to text_lobbies.
-				socket.on ('user leave', payload => {});
+				socket.on ('user leave', payload => {
+				
+				});
+				
 			});
 		}
 		
@@ -34,9 +44,9 @@ export default {
 			// console.log ();
 			socket.emit ('send', {
 				uid: rootState.user._id
-				,message: msg
-				,username: rootState.user.name
-				,user: rootState.profile
+				, message: msg
+				, username: rootState.user.name
+				, user: rootState.profile
 			});
 		}
 		
@@ -47,25 +57,26 @@ export default {
 		, createLobby ({commit, rootState}, lobbyData) {
 			socket.emit ('createLobby', {
 				uid: rootState.user._id
-				,user: rootState.profile
-				,title: lobbyData.title
-				,description: lobbyData.description
+				, user: rootState.profile
+				, title: lobbyData.title
+				, description: lobbyData.description
 			});
-			console.log (socket)
 		}
 		
 		, join ({rootState}, lobbyId) {
 			socket.emit ('join', {
 				uid: rootState.user._id
-				,user: rootState.profile
-				,lobbyId: lobbyId
+				, user: rootState.profile
+				, lobbyId: lobbyId
 			})
 		}
 		
 		, exitLobby ({rootState}, lobbyId) {
+			console.log (lobbyId);
+			debugger;
 			socket.emit ('exitLobby', {
 				uid: rootState.user._id
-				,lobbyId: lobbyId
+				, lobbyId: lobbyId
 			});
 		}
 	}
