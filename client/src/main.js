@@ -12,6 +12,7 @@ import "vue-material/dist/theme/default.css";
 
 async function init() {
   let user = await AuthService.Authenticate();
+  console.log(user);
   if (user) {
     store.commit("setItem", { address: "user" && "profile", data: user });
   } else {

@@ -29,6 +29,7 @@ export default new Vuex.Store({
 		profile: {},
 		lobby: {},
 		quiz: {},
+		quizes: [],
 		question: [],
 		pageData: {
 			lobbies: Array,
