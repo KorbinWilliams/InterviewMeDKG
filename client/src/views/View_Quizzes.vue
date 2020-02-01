@@ -35,6 +35,7 @@ import Quiz from "../components/Quiz";
 
 export default {
   name: "Quizzes",
+
   methods: {
     setActiveQuiz() {
       this.$store.commit;

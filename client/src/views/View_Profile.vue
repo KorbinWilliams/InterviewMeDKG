@@ -72,6 +72,7 @@ export default {
   data() {
     return {
       profileSettings: {
+        name: "",
         email: "",
         userImage: "",
         jobTitle: "",
