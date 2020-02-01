@@ -49,7 +49,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 @import "../assets/styles/View_Login.css";
+
+#backboard {
+  background-image: url("https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
+  background-size: cover;
+}
 </style>
 
