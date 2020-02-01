@@ -61,7 +61,4 @@ export default {
     transform: rotate(360deg);
   }
 }
-md-menu-content {
-  overflow: initial !important;
-}
 </style>
