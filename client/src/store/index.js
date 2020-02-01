@@ -25,6 +25,7 @@ let api2 = Axios.create({
 });
 
 
+// noinspection JSCheckFunctionSignatures
 export default new Vuex.Store({
 	state: {
 		user: {},
@@ -130,7 +131,7 @@ export default new Vuex.Store({
         console.warn(e.message);
       }
     },
-    async logout({ commit, dispatch }) {
+    async logout({ commit }) {
       try {
         let success = await AuthService.Logout();
         if (!success) {
@@ -227,7 +228,7 @@ if (!Object.prototype.forEach) {
 				throw new TypeError("Not an object");
 			}
 			thisArg = thisArg || window;
-			for (var key in this) {
+			for (let key in this) {
 				if (this.hasOwnProperty(key)) {
 					callback.call(thisArg, this[key], key, this);
 				}

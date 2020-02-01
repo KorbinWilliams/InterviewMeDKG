@@ -1,6 +1,8 @@
 import io from 'socket.io-client';
 import router from '../router/index'
 
+//TODO Add router gaurd at leave from text_lobby view to prevent the user from leaving without clicking a butto, @click should notify the server.
+
 let socket = {};
 
 export default {
@@ -9,7 +11,7 @@ export default {
 			socket = io ('//localhost:3000');
 			socket.on ('CONNECTED', data => {
 				console.log ('Connected to the server socket');
-				commit ('setItem', {address: 'lobby', data})
+				commit ('setItem', {address: 'lobby', data});
 				socket.on ('receive', payload => {
 					if (payload.uid !== rootState.user._id) {
 						payload.received = true;
@@ -18,17 +20,19 @@ export default {
 				});
 				socket.on ('getLobbies', payload => commit ('setPageData', {data: payload, address: 'lobbies'}));
 				socket.on ('createLobby', payload => {
-					commit ('setItem', {data: payload, address: 'lobby'})
+					commit ('setItem', {data: payload, address: 'lobby'});
+					router.push('text_lobby');
 				});
 				socket.on ('joinLobby', payload => {
 					commit ('setItem', {address: 'lobby', data: payload.lobby});
 					router.push ('text_lobby')
-				})
-				//TODO notify all others in lobby of user that joined.
+				});
 				socket.on ('user join', payload => commit ('setOne', {data: payload.lobby}));
 				//TODO reset lobby to empty object and push back to text_lobbies.
 				socket.on ('user leave', payload => {
+				
 				});
+				
 			});
 		}
 		
@@ -57,7 +61,6 @@ export default {
 				, title: lobbyData.title
 				, description: lobbyData.description
 			});
-			console.log (socket)
 		}
 		
 		, join ({rootState}, lobbyId) {
@@ -69,6 +72,8 @@ export default {
 		}
 		
 		, exitLobby ({rootState}, lobbyId) {
+			console.log (lobbyId);
+			debugger;
 			socket.emit ('exitLobby', {
 				uid: rootState.user._id
 				, lobbyId: lobbyId

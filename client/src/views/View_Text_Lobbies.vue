@@ -1,19 +1,18 @@
 <template>
 	<div class="view-categories">
-		<Create_Lobby_Modal/>
+		<Create_Lobby_Modal id="create-lobby-btn"/>
 		
-		<div class="lobby" v-for="lobby in lobbies" :id="lobby._id">
-			<h2>{{ lobby.username }}</h2>
-			<p>{{ lobby.description }}</p>
-			<button type="button" @click="joinLobby(lobby.id)">Join</button>
+		<div id="display-lobbies">
+			<div class="lobby" v-for="lobby in lobbies" :id="lobby._id" @click="joinLobby(lobby.id)">
+				<h2>{{ lobby.title }}</h2>
+				<p>{{ lobby.description }}</p>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 	import Create_Lobby_Modal from "../components/Create_Lobby_Modal";
-	import store from "../store";
-	
 	
 	export default {
 		name: "View_Categories",

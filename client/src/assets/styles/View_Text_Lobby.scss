@@ -2,29 +2,28 @@
 	height: 20vh;
 	position: absolute;
 	bottom: 0;
+	textarea {
+		max-width: 80vw;
+	}
 }
 
 #chat-box {
 	height: 80vh;
 	overflow-y: scroll;
+	.username {
+	
+	}
 }
 
 .chat-item {
 	display: flex;
+	
 	margin: 1rem;
+	max-width: 40vw;
 	position: relative;
-	background: #397c82;
+	background-color: #397c82 !important;
 	border-radius: .4em;
-	&:after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		width: 0;
-		height: 0;
-		border-top-color: #00aabb;
-		border-bottom: 0;
-		border-left: 0;
-
+	.md-list-item-text {
+	
 	}
 }

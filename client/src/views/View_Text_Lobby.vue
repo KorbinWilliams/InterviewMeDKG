@@ -1,14 +1,18 @@
 <template>
 	<section id="chat">
 		<Widget_User/>
-		<md-list id="chat-box" style="padding-top:25px; ">
-			<div v-for="item in chat" class="chat-item" v-bind:class="{'received': item.received}">
-				<h3 v-if="item.received" class="md-display-1">{{item.username}}:</h3>
-				<p v-if="item.received">{{item.message}}</p>
-				<p v-if="!item.received">{{item.message}}</p>
-				<h3 v-if="!item.received" class="md-display-1">:{{item.username}}</h3>
+		<div id="chat-box" class="md-layout md-gutter" style="padding-top:25px; ">
+			<div class="">
+				<md-card v-for="item in chat" class="chat-item md-layout-item" v-bind:class="{'received': item.received}">
+					<md-toolbar :class="{'md-accent received': item.received, 'sent': !item.received}">
+						<md-subheader v-if="item.received" class="username">{{item.username}}</md-subheader>
+						<md-subheader v-if="!item.received" class="username">{{item.username}}</md-subheader>
+						<p v-if="item.received" class="md-list-item-text">{{item.message}}</p>
+						<p v-if="!item.received" class="md-list-item-text">{{item.message}}</p>
+					</md-toolbar>
+				</md-card>
 			</div>
-		</md-list>
+		</div>
 		<md-bottom-bar id="chat-input-form" class="md-layout md-position-bottom">
 			<md-field style="display: flex; flex-direction: row;">
 				<label for="text-chat-input">Message</label>
@@ -56,15 +60,17 @@
 					this.$notify ({
 						group: 'error'
 						, title: 'Please provide input.'
-					})
+					});
 				}
-				;
 				this.$store.dispatch ("send", message);
 				this.userInput = '';
 			},
 			getLobbies () {
 				this.$store.dispatch ("getLobbies");
 			}
+		}
+		, beforeDestroy () {
+			this.$store.dispatch('exitLobby', this.$store.state.lobby.socket);
 		}
 	};
 </script>

@@ -49,9 +49,6 @@ export default {
           text: "Please make sure your passwords match.",
           duration: 3500
         });
-        console.log(
-          "bad pass bitch, watch it or we gon dance on the blacktop playboy bitch"
-        );
         return;
       } else if (password.length < 8) {
         this.$notify({
@@ -62,7 +59,7 @@ export default {
         });
         return;
       } else if (
-        !password.match(/[0-9]/g) ||
+         !password.match(/[0-9]/g) ||
         !password.match(/[a-z]/g) ||
         !password.match(/[A-Z]/g)
       ) {
