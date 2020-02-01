@@ -6,9 +6,9 @@
       </div>
     </div>
     <div class="row">
-      <div class="question col-3" v-for="question in quizData.questions" :key="question._id">
-        <h5 @click="showAnswer">{{question.description}}</h5>
-        <p v-show="sAnswer == true">{{question.answer}}</p>
+      <div class="question col-3" v-for="(question, index) in quizData.questions" :key="index">
+        <h5 @click="showAnswer(index)">{{question.description}}</h5>
+        <p v-show="question.show == true">{{question.answer}}</p>
       </div>
     </div>
   </div>
@@ -18,16 +18,19 @@
 export default {
   name: "Quiz",
   props: ["quizData"],
-  data() {
-    return {
-      sAnswer: false
-    };
-  },
   methods: {
-    showAnswer() {
-      if (this.sAnswer == true) {
-        this.sAnswer = false;
-      } else this.sAnswer = true;
+    showAnswer(index) {
+      if (this.quizData.questions[index].show == true) {
+        this.quizData.questions[index].show = false;
+      } else {
+        this.quizData.questions[index].show = true;
+      }
+
+      this.$store.dispatch("setActive", {
+        commit: "setItem",
+        data: this.quizData,
+        commitAddress: "quiz"
+      });
     },
     nextQuestion() {},
     previousQuestion() {}
