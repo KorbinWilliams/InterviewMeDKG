@@ -49,7 +49,7 @@ import ProfileController from "./controllers/ProfileController";
 server.use("/api/quizes", new QuizController().router);
 server.use("/api/profiles", new ProfileController().router);
 
-//NOTE Default error handler, catches all routes with an error attached
+//? Default error handler, catches all routes with an error attached
 server.use((error, req, res, next) => {
   res.status(error.status || 400).send({ error: { message: error.message } });
 });

@@ -44,7 +44,6 @@
 			createTextLobby () {
 				this.$store.dispatch ('createLobby', {title: this.newTextLobby.title, description:
 					this.newTextLobby.description});
-				this.$router.push('text_lobby');
 				this.newTextLobby = {
 					title: "",
 					description: ""
